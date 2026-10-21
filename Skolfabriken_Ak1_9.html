@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skolfabriken Åk 1–9 (Årskursanpassad v8.0)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#0f172a;line-height:1.4}
+.hdr{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;padding:.75rem 1.2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem}
+.hdr h1{font-size:1.2rem;font-weight:800}.hdr .sub{font-size:.76rem;color:#cbd5e1}
+.btn{padding:.48rem .9rem;border-radius:6px;font-weight:700;font-size:.82rem;cursor:pointer;border:none;color:#fff}
+.b-grn{background:#10b981}.b-blu{background:#3b82f6}
+.sbar{background:#fff;border-bottom:1px solid #cbd5e1;padding:.5rem;display:flex;gap:.35rem;justify-content:center;flex-wrap:wrap}
+.sbtn{padding:.38rem .75rem;border-radius:99px;border:1.5px solid #cbd5e1;background:#f8fafc;font-weight:700;font-size:.78rem;cursor:pointer}
+.sbtn.act{background:#1e3a8a;color:#fff;border-color:#1e3a8a}
+.wrap{max-width:1420px;margin:.9rem auto;padding:0 .9rem;display:grid;grid-template-columns:340px 1fr;gap:1.1rem;align-items:start}
+@media(max-width:980px){.wrap{grid-template-columns:1fr}}
+.side{background:#fff;border-radius:10px;padding:1rem;border:1px solid #cbd5e1;position:sticky;top:.8rem}
+.side h2{font-size:.92rem;margin-bottom:.6rem;padding-bottom:.3rem;border-bottom:2px solid #e2e8f0;color:#1e3a8a}
+.fg{margin-bottom:.72rem}.fg label{display:block;font-weight:700;font-size:.76rem;margin-bottom:.25rem}
+.ggrid,.lgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:.28rem}
+.gbtn,.lbtn{padding:.35rem .15rem;text-align:center;font-size:.75rem;font-weight:700;border:1px solid #cbd5e1;border-radius:5px;background:#f8fafc;cursor:pointer}
+.gbtn small{display:block;font-size:.6rem;font-weight:400;color:#64748b}
+.gbtn.act,.lbtn.act{background:#1e3a8a;color:#fff;border-color:#1e3a8a}.gbtn.act small{color:#bfdbfe}
+.ctrl{width:100%;padding:.42rem;border:1px solid #cbd5e1;border-radius:5px;font-size:.8rem;font-weight:600;background:#f8fafc}
+.cbox{display:flex;flex-direction:column;gap:.28rem;background:#f8fafc;padding:.55rem;border-radius:5px;border:1px solid #e2e8f0;font-size:.76rem}
+.cbox label{display:flex;align-items:center;gap:.35rem;font-weight:500;cursor:pointer;margin:0}
+.goal{font-size:.72rem;background:#f0fdf4;color:#166534;border-left:3px solid #16a34a;padding:.4rem;border-radius:4px;margin-top:.35rem}
+.pwrap{display:flex;flex-direction:column;gap:1.4rem}
+.page{background:#fff;width:210mm;min-height:297mm;margin:0 auto;padding:11mm 13mm;box-shadow:0 4px 15px rgba(0,0,0,.08);border:1px solid #cbd5e1;color:#000}
+@media(max-width:820px){.page{width:100%;min-height:auto;padding:.9rem}}
+.phdr{border-bottom:2px solid #000;padding-bottom:5px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:flex-end}
+.btag{font-size:.68rem;text-transform:uppercase;font-weight:800}.phdr h1{font-size:1.12rem;font-weight:800}
+.meta{text-align:right;font-size:.74rem;line-height:1.65;white-space:nowrap}.meta span{display:inline-block;border-bottom:1px solid #000;width:100px;margin-left:3px}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:8px}.pgrid.sgl{grid-template-columns:1fr}
+.ibox{border:1.5px solid #000;border-radius:5px;padding:6px 8px;font-size:.76rem}.ibox.sh{border-style:dashed;background:#fafafa}
+.exbox{border:1.5px solid #000;border-radius:5px;padding:5px 8px;font-size:.77rem;margin-bottom:8px;background:#f8fafc}
+.ititle{font-weight:800;text-transform:uppercase;font-size:.7rem;border-bottom:1px solid #ccc;padding-bottom:2px;margin-bottom:3px}
+.ibox code,.exbox code{font-family:monospace;font-weight:700;background:#eee;padding:0 3px}
+.stitle{font-size:.8rem;font-weight:800;text-transform:uppercase;border-bottom:1.5px solid #000;padding-bottom:2px;margin:8px 0 6px;display:flex;justify-content:space-between}
+.stitle small{font-weight:400;text-transform:none;font-size:.7rem}
+.egrid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 14px;margin-bottom:9px}.egrid.sgl{grid-template-columns:1fr;gap:4px}
+.eitem{display:flex;align-items:baseline;font-size:.85rem;padding:3px 2px;border-bottom:1px dotted #888;page-break-inside:avoid;gap:4px}
+.eitem.ws{flex-direction:column;border:1px solid #999;border-radius:4px;padding:4px 6px}
+.enum{font-weight:700;font-size:.73rem;min-width:19px}.eq{font-weight:600;flex:1}
+.eline{display:inline-block;border-bottom:1.5px solid #000;min-width:60px;margin-left:4px}
+.wgrid{width:100%;height:26px;background-image:linear-gradient(to right,#e5e7eb 1px,transparent 1px),linear-gradient(to bottom,#e5e7eb 1px,transparent 1px);background-size:10px 10px;margin-top:3px;border:1px solid #ccc}
+.klist{display:flex;flex-direction:column;gap:6px}
+.kcard{border:1.5px solid #000;border-radius:5px;padding:5px 8px;font-size:.79rem;page-break-inside:avoid}
+.khead{font-weight:800;font-size:.74rem;display:flex;justify-content:space-between;margin-bottom:2px}
+.kans{height:24px;border-top:1px dashed #aaa;margin-top:3px;display:flex;align-items:flex-end;justify-content:flex-end;font-size:.73rem;font-weight:700}
+.ftr{margin-top:9px;padding-top:4px;border-top:1px solid #000;display:flex;justify-content:space-between;font-size:.68rem}
+.fgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:4px 12px}
+.fitem{border-bottom:1px solid #ddd;padding:3px 2px;font-size:.76rem;page-break-inside:avoid}
+.fstep{display:block;font-size:.7rem;color:#222;font-style:italic}
+@media print{body{background:#fff}.no-print{display:none!important}.wrap{display:block;margin:0;padding:0}.pwrap{gap:0}.page{width:100%;min-height:auto;margin:0;padding:8mm 10mm;box-shadow:none;border:none;page-break-after:always}.page:last-child{page-break-after:auto}}
+</style>
+</head>
+<body>
+
+<header class="hdr no-print">
+  <div>
+    <h1>🏫 Skolfabriken Åk 1–9 <span style="font-size:.7rem;background:#10b981;padding:2px 6px;border-radius:99px;">Årskursstyrd v8.0</span></h1>
+    <div class="sub">Träningsområden, regler, genvägar & kluringar exakt anpassade efter respektive årskurs (Lgr22)</div>
+  </div>
+  <div style="display:flex;gap:.4rem">
+    <button class="btn b-blu" onclick="render()">🔄 Slumpa nya uppgifter & kluringar</button>
+    <button class="btn b-grn" onclick="window.print()">🖨️ Skriv ut / Spara PDF</button>
+  </div>
+</header>
+
+<nav class="sbar no-print">
+  <button class="sbtn act" data-s="matte" onclick="setS('matte')">📐 Matematik</button>
+  <button class="sbtn" data-s="svenska" onclick="setS('svenska')">📝 Svenska</button>
+  <button class="sbtn" data-s="engelska" onclick="setS('engelska')">🇬🇧 Engelska</button>
+  <button class="sbtn" data-s="spanska" onclick="setS('spanska')">🇪🇸 Spanska</button>
+  <button class="sbtn" data-s="franska" onclick="setS('franska')">🇫🇷 Franska</button>
+  <button class="sbtn" data-s="so" onclick="setS('so')">🌍 SO & Geografi</button>
+  <button class="sbtn" data-s="no" onclick="setS('no')">🧪 NO (Fys/Kem/Bio)</button>
+  <button class="sbtn" data-s="musik" onclick="setS('musik')">🎹 Musik</button>
+</nav>
+
+<main class="wrap">
+  <aside class="side no-print">
+    <h2>⚙️ Anpassa arbetsbladet</h2>
+    <div class="fg">
+      <label>1. Välj Årskurs (Styr kapitlen nedan!)</label>
+      <div class="ggrid">
+        <button class="gbtn" onclick="setG(1)">Åk 1<small>Alfa Mini 1</small></button>
+        <button class="gbtn" onclick="setG(2)">Åk 2<small>Alfa Mini 2</small></button>
+        <button class="gbtn" onclick="setG(3)">Åk 3<small>Alfa Mini 3</small></button>
+        <button class="gbtn" onclick="setG(4)">Åk 4<small>Matte Alfa</small></button>
+        <button class="gbtn act" onclick="setG(5)">Åk 5<small>Matte Beta</small></button>
+        <button class="gbtn" onclick="setG(6)">Åk 6<small>Matte Gamma</small></button>
+        <button class="gbtn" onclick="setG(7)">Åk 7<small>Matematik X</small></button>
+        <button class="gbtn" onclick="setG(8)">Åk 8<small>Matematik Y</small></button>
+        <button class="gbtn" onclick="setG(9)">Åk 9<small>Matematik Z</small></button>
+      </div>
+    </div>
+    <div class="fg">
+      <label for="tSel" id="tLbl">2. Specifikt Träningsområde i Åk 5</label>
+      <select id="tSel" class="ctrl" onchange="render()"></select>
+      <div class="goal" id="gBadge"></div>
+    </div>
+    <div class="fg">
+      <label>3. Svårighetsnivå i vald årskurs</label>
+      <div class="lgrid">
+        <button class="lbtn" data-l="1" onclick="setL(1)">Nivå 1 (Bas)</button>
+        <button class="lbtn act" data-l="2" onclick="setL(2)">Nivå 2 (Kärna)</button>
+        <button class="lbtn" data-l="3" onclick="setL(3)">Nivå 3 (Utmaning)</button>
+      </div>
+    </div>
+    <div class="fg">
+      <label for="cSel">4. Antal mängdträningsuppgifter</label>
+      <select id="cSel" class="ctrl" onchange="render()">
+        <option value="12">12 uppgifter (Luftigt)</option>
+        <option value="16" selected>16 uppgifter (Standard)</option>
+        <option value="20">20 uppgifter (Mängdträning)</option>
+        <option value="24">24 uppgifter (Intensiv)</option>
+      </select>
+    </div>
+    <div class="fg">
+      <label>5. Pedagogiskt stöd på utskriften</label>
+      <div class="cbox">
+        <label><input type="checkbox" id="cM" checked onchange="render()"> Visa <strong>"Så här fungerar det"</strong></label>
+        <label><input type="checkbox" id="cS" checked onchange="render()"> Visa <strong>"Genvägen / Knepet"</strong></label>
+        <label><input type="checkbox" id="cE" checked onchange="render()"> Visa <strong>"Löst typexempel"</strong> (Arbetsminnesstöd)</label>
+        <label><input type="checkbox" id="cK" checked onchange="render()"> Visa <strong>"Veckans Kluringar"</strong> (Slumpas & nivåstyrs)</label>
+        <label><input type="checkbox" id="cG" onchange="render()"> Visa rutnät under varje uppgift</label>
+        <label><input type="checkbox" id="cF" checked onchange="render()"> Generera <strong>Facit med tankekedjor</strong> (Sida 2)</label>
+      </div>
+    </div>
+  </aside>
+  <section class="pwrap" id="out"></section>
+</main>
+
+<script>
+let curS='matte', curG=5, curL=2;
+const R=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+const P=(a)=>a[Math.floor(Math.random()*a.length)];
+const F=(n,d=1)=>Number(n).toFixed(d).replace('.',',');
+const Q=(q,a,step)=>({q,a,step});
+const T=(id,grades,title,method,shortcut,gen,klur)=>({id,grades,title,method,shortcut,gen,klur});
+const SNAMES={matte:"Matematik",svenska:"Svenska",engelska:"Engelska",spanska:"Spanska",franska:"Franska",so:"SO & Geografi",no:"NO (Fys/Kem/Bio)",musik:"Musik & Keyboard"};
+const MBOOKS={1:"Alfa Mini 1",2:"Alfa Mini 2",3:"Alfa Mini 3 (NP)",4:"Matematik Alfa",5:"Matematik Beta",6:"Matematik Gamma (NP)",7:"Matematik X",8:"Matematik Y",9:"Matematik Z (NP)"};
+const NAMES=["Astrid","Nils","Elsa","Leo","Maja","Hugo","Alma","Liam","Vera","Noah"];
+
+function adaptQ(baseQ, hintChoices, ans, step, l) {
+  if (l === 1 && hintChoices) return Q(`${baseQ} (${hintChoices})`, ans, step);
+  if (l === 3 && !baseQ.includes("[")) return Q(`${baseQ} [Förklara/skriv hela]`, ans, step);
+  return Q(baseQ, ans, step);
+}
+
+function pickKlur(pool, l) {
+  const copy=[...pool], out=[];
+  const tags=l===1?["Nivå 1 (Bas)","Nivå 1 (Bas)","Nivå 2 (Kärna)"]:(l===2?["Nivå 1 (Bas)","Nivå 2 (Kärna)","Nivå 3 (Utmaning)"]:["Nivå 2 (Kärna)","Nivå 3 (Utmaning)","Nivå 3 (Överkurs)"]);
+  for(let i=0;i<3&&copy.length>0;i++){
+    const k=copy.splice(Math.floor(Math.random()*copy.length),1)[0];
+    out.push([tags[i],k[0],k[1],k[2]]);
+  }
+  return out;
+}
+
+// ===========================================================================
+// ÅRSKURSSTYRDA MIKROMOMENT FÖR ALLA 8 ÄMNEN (LGR22)
+// ===========================================================================
+function getAllTopics(s, g) {
+  // -------------------------------------------------------------------------
+  // 1. MATEMATIK – Exakt anpassad för respektive årskurs (Åk 1–9)
+  // -------------------------------------------------------------------------
+  if (s === 'matte') {
+    const dynAddKlur = (l, scale) => {
+      let a=R(4,9)*scale*l, b=R(3,8)*scale*l, m=R(5,12)*scale*l;
+      return [
+        [`Nivå ${l}`,`${P(NAMES)} har ${a} kr och får ${b} kr till. Hur mycket har hon nu?`,`${a+b} kr`,`${a} + ${b} = ${a+b}.`],
+        [`Nivå ${l}`,`Jag tänker på ett tal, drar bort ${b} och får ${a}. Vilket var talet?`,`${a+b}`,`Baklänges: ${a} + ${b} = ${a+b}.`],
+        [`Nivå ${l}`,`Summan av tre på varandra följande heltal är ${m*3}. Vilka är de tre talen?`,`${m-1}, ${m}, ${m+1}`,`Talet i mitten är ${m*3}/3 = ${m}.`]
+      ];
+    };
+    const dynMultKlur = (l) => {
+      let r=R(4,9), c=R(5,9), f1=R(4,9), f2=R(5,9);
+      return [
+        [`Nivå ${l}`,`Det står ${r} rader med ${c} stolar i varje rad. Hur många stolar finns det totalt?`,`${r*c} stolar`,`${r} · ${c} = ${r*c}.`],
+        [`Nivå ${l}`,`Dela ${r*c} kr lika på ${r} syskon. Hur mycket får var och en?`,`${c} kr`,`${r*c} / ${r} = ${c} kr.`],
+        [`Nivå ${l}`,`Två heltal multipliceras till ${f1*f2} och adderas till ${f1+f2}. Vilka är talen?`,`${f1} och ${f2}`,`${f1}·${f2}=${f1*f2} och ${f1}+${f2}=${f1+f2}.`]
+      ];
+    };
+
+    return [
+      // --- ÅK 1 (Alfa Mini 1) ---
+      T("m1_1",[1],"Åk 1: Tiokompisar & Talsamband (0–10)",
+        "<strong>Tiokompisar</strong> är två tal som tillsammans blir 10: <code>1+9, 2+8, 3+7, 4+6, 5+5</code>.",
+        "⚡ <strong>Genvägen:</strong> Kan du tiokompisarna i sömnen vet du också direkt vad <code>10 - 7</code> är (eftersom 7 och 3 hör ihop)!",
+        (l)=>{ let a=R(1,9), b=R(2,8); return l===1?Q(`${a} + ___ = 10`,`${10-a}`,`${a} och ${10-a} är tiokompisar.`):(l===2?Q(`10 - ${a} =`,`${10-a}`,`Tiokompisen till ${a} är ${10-a}.`):Q(`1${a} + ___ = 20`,`${10-a}`,`Entalet ${a} saknar sin tiokompis ${10-a} upp till 20.`)); },
+        (l)=>dynAddKlur(l,1)
+      ),
+      T("m1_2",[1],"Åk 1: Addition & Subtraktion (0–20)",
+        "När du räknar över 10 (t.ex. <code>8 + 5</code>), <strong>mellanlanda alltid på 10</strong>: <code>8 + 2 = 10</code>, och <code>10 + 3 = 13</code>.",
+        "⚡ <strong>Genvägen:</strong> Vid <code>14 - 6</code>: Hoppa först ner till 10 (<code>14 - 4 = 10</code>) och ta bort de 2 som är kvar → <code>8</code>!",
+        (l)=>{ let a=R(6,9), b=R(3,8), c=R(11,17), d=R(c-9,9); return l===1?Q(`${a} + ${b} =`,`${a+b}`,`Fyll till 10 (+${10-a}), lägg på resten → ${a+b}.`):(l===2?Q(`${c} - ${d} =`,`${c-d}`,`Gå ner till 10 (-${c-10}), ta bort resten → ${c-d}.`):Q(`${a} + ___ = ${a+b}`,`${b}`,`Från ${a} via 10 upp till ${a+b} är det ${b}.`)); },
+        (l)=>dynAddKlur(l,1)
+      ),
+      T("m1_3",[1],"Åk 1: Dubblor, Halvor & Nästan-dubblor (0–20)",
+        "En <strong>dubbla</strong> är samma tal två gånger (<code>6 + 6 = 12</code>). <strong>Hälften</strong> är motsatsen (hälften av 12 är 6).",
+        "⚡ <strong>Genvägen (Dubbla + 1):</strong> Ser du två grann-tal som <code>6 + 7</code>? Ta dubblan av det minsta (<code>6+6=12</code>) och lägg på 1 → <code>13</code>!",
+        (l)=>{ let a=R(2,9); return l===1?Q(`Dubbelt så mycket: ${a} + ${a} =`,`${a*2}`,`Dubblan av ${a} är ${a*2}.`):(l===2?Q(`Hälften av ${a*2} =`,`${a}`,`Eftersom ${a}+${a}=${a*2}.`):Q(`Nästan-dubbla: ${a} + ${a+1} =`,`${a*2+1}`,`Dubblan ${a}+${a}=${a*2}, plus 1 = ${a*2+1}.`)); },
+        (l)=>dynAddKlur(l,1)
+      ),
+      T("m1_4",[1],"Åk 1: Likhetstecknet (Gungbrädan) & Saknad term",
+        "Likhetstecknet <code>=</code> betyder att det ska vara <strong>lika mycket på båda sidor</strong> (som en gungbräda i balans).",
+        "⚡ <strong>Genvägen:</strong> Räkna först ut den sida som är helt klar, och se sedan vad som saknas på den andra sidan!",
+        (l)=>{ let s=R(8,16), a=R(2,s-2), c=R(1,s-2); return l===1?Q(`${a} + ___ = ${s}`,`${s-a}`,`Det saknas ${s-a} upp till ${s}.`):(l===2?Q(`${s} = ${a} + ___`,`${s-a}`,`Båda sidor ska vara ${s}.`):Q(`${a} + ${s-a} = ___ + ${c}`,`${s-c}`,`Vänster sida är ${s}, så höger sida ska bli ${s-c}+${c}=${s}.`)); },
+        (l)=>dynAddKlur(l,1)
+      ),
+      T("m1_5",[1],"Åk 1: Klockan (Hel- & Halvtimme) och Längd (cm, dm)",
+        "När långa visaren pekar på <strong>12</strong> är klockan <strong>hel timme</strong>. Pekar den rakt ner på <strong>6</strong> är klockan <strong>halv</strong>. <code>1 dm = 10 cm</code>.",
+        "⚡ <strong>Genvägen:</strong> ”Halv sju” betyder halvvägs till 7 (alltså <code>06:30</code> – 30 minuter före 7)!",
+        (l)=>{ let h=R(1,9), d=R(1,9); return l===1?Q(`Klockan är ${h}:00. Vad är hon om 2 timmar?`,`kl. ${h+2}:00`,`${h} + 2 = ${h+2}.`):(l===2?Q(`Hur många cm är ${d} dm?`,`${d*10} cm`,`1 dm = 10 cm → ${d}·10 = ${d*10} cm.`):Q(`Klockan är halv ${h+1}. Vad är hon om en halvtimme?`,`kl. ${h+1}:00`,`30 min efter halv ${h+1} är hon hel (${h+1}:00).`)); },
+        (l)=>dynAddKlur(l,1)
+      ),
+
+      // --- ÅK 2 (Alfa Mini 2) ---
+      T("m2_1",[2],"Åk 2: Positionssystemet – Tiotal, Ental & Hundrakompisar (0–100)",
+        "I talet <code>47</code> är 4:an värd <strong>4 tiotal (40)</strong> och 7:an värd <strong>7 ental (7)</strong>. Hundrakompisar blir 100 tillsammans.",
+        "⚡ <strong>Genvägen (Upp till 100):</strong> Från <code>63</code> till <code>100</code>: fyll först entalet till 70 (<code>+7</code>) och lägg på tiotalen till 100 (<code>+30</code>) → <code>37</code>!",
+        (l)=>{ let t=R(2,9), e=R(1,9), n=t*10+e; return l===1?Q(`${t} tiotal och ${e} ental =`,`${n}`,`${t*10} + ${e} = ${n}.`):(l===2?Q(`${t*10} + ___ = 100`,`${100-t*10}`,`${t} tiotal + ${10-t} tiotal = 100.`):Q(`${n} + ___ = 100`,`${100-n}`,`Upp till ${t*10+10} är det ${10-e}, plus ${90-t*10} = ${100-n}.`)); },
+        (l)=>dynAddKlur(l,2)
+      ),
+      T("m2_2",[2],"Åk 2: Addition & Subtraktion med tiotalsövergång (0–100)",
+        "Dela upp det andra talet i tiotal och ental: <code>46 + 27 = 46 + 20 + 7 = 73</code>.",
+        "⚡ <strong>Genvägen (Slipp låna vid minus!):</strong> Vid <code>72 - 38</code> lägger du på <code>+2</code> på BÅDA talen → <code>74 - 40 = 34</code>!",
+        (l)=>{ let a=R(3,7)*10+R(6,9), b=R(1,2)*10+R(5,8), p=10-(b%10); return l===1?Q(`${a} + ${b} =`,`${a+b}`,`Flytta ${10-(a%10)} till ${a} → ${a+b}.`):(l===2?Q(`${a} - ${b} =`,`${a-b}`,`+${p} på båda: ${a+p} - ${b+p} = ${a-b}.`):Q(`${a} - ___ = ${a-b}`,`${b}`,`${a} - ${a-b} = ${b}.`)); },
+        (l)=>dynAddKlur(l,3)
+      ),
+      T("m2_3",[2],"Åk 2: Multiplikation – Tabell 2, 4, 5 och 10",
+        "Multiplikation är upprepad addition: <code>4 · 5 = 5 + 5 + 5 + 5 = 20</code>.",
+        "⚡ <strong>Genvägen:</strong> <strong>2:ans tabell</strong> är dubblor. <strong>4:ans tabell</strong> är dubbelt av dubbelt (<code>4·6 → 12 → 24</code>). <strong>5:an</strong> är halva 10:ans tabell!",
+        (l)=>{ let a=P(l===1?[2,10]:(l===2?[2,5,10]:[2,4,5,10])), b=R(2,10); return Q(`${a} · ${b} =`,`${a*b}`,a===4?`Dubbla ${b} två gånger: ${b*2} → ${b*4}.`:`${a} grupper med ${b} är ${a*b}.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m2_4",[2],"Åk 2: Enkel Division (Dela lika) & Halvor/Fjärdedelar",
+        "Att dividera med 2 är att ta <strong>hälften</strong>. Att dividera med 4 är att ta <strong>hälften av hälften (en fjärdedel)</strong>.",
+        "⚡ <strong>Genvägen:</strong> Tänk multiplikation baklänges! Vid <code>35 / 5</code> frågar du: <em>”Vad gånger 5 är 35?”</em> Jo, 7!",
+        (l)=>{ let d=P(l===1?[2,10]:[2,4,5,10]), q=R(2,10); return Q(`${d*q} / ${d} =`,`${q}`,`Eftersom ${q} · ${d} = ${d*q}.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m2_5",[2],"Åk 2: Klockan (Kvart i/över) & Enheter (m, dm, cm, kg, l)",
+        "En timme = <strong>60 minuter</strong>, en halvtimme = <strong>30 min</strong>, en kvart = <strong>15 min</strong>. <code>1 m = 10 dm = 100 cm</code>.",
+        "⚡ <strong>Genvägen:</strong> ”Kvart i 4” är 15 minuter före 4 (<code>03:45</code>). ”Kvart över 4” är 15 minuter efter 4 (<code>04:15</code>)!",
+        (l)=>{ let m=R(2,9), h=R(1,8); return l===1?Q(`Hur många cm är ${m} meter?`,`${m*100} cm`,`1 m = 100 cm.`):(l===2?Q(`Klockan är kvart över ${h} (${h}:15). Vad är hon om 30 minuter?`,`kvart i ${h+1} (${h}:45)`,`15 + 30 = 45 min.`):Q(`${m} m och ${h} dm = ___ cm`,`${m*100+h*10} cm`,`${m*100} + ${h*10} cm.`)); },
+        (l)=>dynAddKlur(l,2)
+      ),
+
+      // --- ÅK 3 (Alfa Mini 3 & NP Åk 3) ---
+      T("m3_1",[3],"Åk 3: Addition & Subtraktion i talområdet 0–1 000",
+        "Dela upp i hundratal, tiotal och ental. Vid jämna hundratal som <code>500 - 236</code> kan du räkna <strong>avståndet uppåt</strong> från 236 till 500!",
+        "⚡ <strong>Genvägen (-1 på båda vid jämna hundratal!):</strong> Vid <code>600 - 247</code>: dra bort 1 från båda talen → <code>599 - 246 = 353</code> helt utan låning!",
+        (l)=>{ let a=R(215,680), b=R(115,285), h=R(4,9)*100; return l===1?Q(`${a} + ${b} =`,`${a+b}`,`Hundratal + tiotal + ental = ${a+b}.`):(l===2?Q(`${h} - ${b} =`,`${h-b}`,`Genväg (-1 på båda): ${h-1} - ${b-1} = ${h-b}.`):Q(`${a} + 199 =`,`${a+199}`,`Lägg till 200 och dra bort 1 → ${a+199}.`)); },
+        (l)=>dynAddKlur(l,10)
+      ),
+      T("m3_2",[3],"Åk 3: Multiplikationstabellerna (Tabell 3, 6, 7, 8 och 9)",
+        "Dela upp svåra tabeller i 5:ans och 2:ans tabell: <code>7 · 8 = (5 · 8) + (2 · 8) = 40 + 16 = 56</code>.",
+        "⚡ <strong>Genvägen (9:ans tabell):</strong> Ta <code>10 · talet minus talet</code>! Ex: <code>9 · 8 = 80 - 8 = 72</code> (och siffersumman <code>7+2</code> blir alltid 9!).",
+        (l)=>{ let a=P(l===1?[3,6]:[6,7,8,9]), b=R(4,9); return Q(`${a} · ${b} =`,`${a*b}`,a===9?`10·${b} - ${b} = ${a*b}.`:`(5·${b}) + (${a-5}·${b}) = ${a*b}.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m3_3",[3],"Åk 3: Division & Division med rest",
+        "Om divisionen inte går jämnt ut får vi en <strong>rest</strong>: Vid <code>26 / 6</code> går 6 i 26 <strong>4 gånger</strong> (<code>4·6=24</code>) med <strong>rest 2</strong>.",
+        "⚡ <strong>Genvägen:</strong> Hitta det största talet i nämnarens multiplikationstabell som inte är större än täljaren!",
+        (l)=>{ let d=P([4,5,6,7,8,9]), q=R(4,9), r=R(1,d-1); return l<3?Q(`${d*q} / ${d} =`,`${q}`,`Eftersom ${q} · ${d} = ${d*q}.`):Q(`${d*q+r} / ${d} = (svara med rest)`,`${q} rest ${r}`,`${q}·${d} = ${d*q}, och ${d*q+r}-${d*q} = ${r} i rest.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m3_4",[3],"Åk 3: Enhetsomvandling (m/dm/cm, kg/g, liter/dl)",
+        "<code>1 m = 10 dm = 100 cm</code> • <code>1 km = 1 000 m</code> • <code>1 kg = 1 000 g</code> • <code>1 liter = 10 dl = 100 cl</code>.",
+        "⚡ <strong>Genvägen:</strong> Ordet <em>kilo</em> betyder alltid <strong>1 000</strong> (1 kg = 1 000 g, 1 km = 1 000 m) och <em>deci</em> betyder <strong>tiondel</strong> (10 dl på 1 l)!",
+        (l)=>{ let n=R(2,9), e=R(1,8); return l===1?Q(`${n} kg = ___ g`,`${n*1000} g`,`1 kg = 1 000 g.`):(l===2?Q(`${n} liter och ${e} dl = ___ dl`,`${n*10+e} dl`,`${n*10} + ${e} dl.`):Q(`${n} kg och ${e*100} g - 500 g = ___ g`,`${n*1000+e*100-500} g`,`Omvandla till gram först.`)); },
+        (l)=>dynAddKlur(l,5)
+      ),
+      T("m3_5",[3],"Åk 3: Geometri – Omkrets av rektanglar, kvadrater & trianglar",
+        "<strong>Omkrets</strong> är sträckan hela vägen runt en figur (addera alla sidornas längder).",
+        "⚡ <strong>Genvägen (Rektangelns omkrets):</strong> Addera EN långsida + EN kortsida, och <strong>dubbla</strong> svaret!",
+        (l)=>{ let b=R(5,14), h=R(3,9); return l===1?Q(`Kvadrat med sidan ${b} cm. Omkrets?`,`${b*4} cm`,`4 lika sidor: 4 · ${b} = ${b*4} cm.`):(l===2?Q(`Rektangel med sidorna ${b} cm och ${h} cm. Omkrets?`,`${2*(b+h)} cm`,`2 · (${b} + ${h}) = ${2*(b+h)} cm.`):Q(`En kvadrat har omkretsen ${b*4} cm. Hur lång är en sida?`,`${b} cm`,`${b*4} / 4 = ${b} cm.`)); },
+        (l)=>dynMultKlur(l)
+      ),
+
+      // --- ÅK 4 (Matematik Alfa) ---
+      T("m4_1",[4],"Åk 4: Stora tal, Positionssystemet & Avrundning",
+        "Vid avrundning styr siffran direkt till höger: <strong>0, 1, 2, 3, 4</strong> avrundas <strong>nedåt</strong>; <strong>5, 6, 7, 8, 9</strong> avrundas <strong>uppåt</strong>.",
+        "⚡ <strong>Genvägen:</strong> Gör alltid ett snabbt överslag med avrundade hundratal först så ser du om ditt svar är rimligt!",
+        (l)=>{ let n=R(12,98)*10+R(2,8), r=Math.round(n/100)*100, a=R(1200,4800), b=R(1100,3500); return l===1?Q(`Avrunda ${n} till närmaste hundratal:`,`${r}`,`Tiotalssiffran avgör → ${r}.`):(l===2?Q(`${a} + ${b} =`,`${a+b}`,`Tusental + hundratal.`):Q(`Avrunda ${a+R(15,85)} till närmaste tusental:`,`${Math.round(a/1000)*1000}`,`Hundratalssiffran avgör.`)); },
+        (l)=>dynAddKlur(l,20)
+      ),
+      T("m4_2",[4],"Åk 4: Flerstegsmultiplikation (24 · 4) & Tabellautomatisering",
+        "Vid <code>24 · 4</code> delar du upp i tiotal och ental: <code>(20 · 4) + (4 · 4) = 80 + 16 = 96</code>.",
+        "⚡ <strong>Genvägen (Dubbelt & Halvt):</strong> Vid <code>15 · 6</code> dubblar du 15 till 30 och halverar 6 till 3 → <code>30 · 3 = 90</code>!",
+        (l)=>{ let a=R(12,36), b=R(3,8); return l===1?Q(`${R(2,9)*10} · ${b} =`,`${(a-a%10)*b}`,`Multiplicera och lägg på nollan.`):Q(`${a} · ${b} =`,`${a*b}`,`(${Math.floor(a/10)*10}·${b}) + (${a%10}·${b}) = ${a*b}.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m4_3",[4],"Åk 4: Kort division (96 / 4)",
+        "Vid kort division delar du från vänster (tiotalen först) och flyttar eventuell rest som tiotal till entalen.",
+        "⚡ <strong>Genvägen (Dela upp täljaren!):</strong> Vid <code>84 / 6</code>: tänk <code>60 / 6 = 10</code> och <code>24 / 6 = 4</code> → <code>14</code>!",
+        (l)=>{ let d=R(3,8), q=R(12,28); return Q(`${d*q} / ${d} =`,`${q}`,`Dela upp i ${d*10}/${d} (=10) + ${d*(q-10)}/${d} (=${q-10}) = ${q}.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m4_4",[4],"Åk 4: Bråk i vardagen – Del av antal (3/4 av 28)",
+        "I bråket <code>3/4</code> visar nämnaren (4) i hur många lika delar helheten delas, och täljaren (3) hur många delar vi tar.",
+        "⚡ <strong>Genvägen:</strong> Dividera ALLTID med nämnaren (nere) först (<code>28 / 4 = 7</code>), och multiplicera med täljaren (uppe) sist (<code>3 · 7 = 21</code>)!",
+        (l)=>{ let d=P([3,4,5,6,8,10]), k=R(3,11), n=l===1?1:R(2,d-1); return Q(`Hur mycket är ${n}/${d} av ${d*k}?`,`${n*k}`,`1/${d} är ${k}, så ${n}/${d} är ${n}·${k} = ${n*k}.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m4_5",[4],"Åk 4: Decimaltal – Tiondelar (0,1) & Hundradelar (0,01)",
+        "Första siffran efter kommat är <strong>tiondelar (0,1)</strong>, andra är <strong>hundradelar (0,01)</strong>. 10 tiondelar = 1 hel.",
+        "⚡ <strong>Genvägen (Fyll på med nolla!):</strong> Skriv <code>0,6</code> som <code>0,60</code> innan du jämför eller adderar med hundradelar!",
+        (l)=>{ let a=R(1,9), b=R(12,78); return l===1?Q(`0,${a} + ___ = 1`,`0,${10-a}`,`${a} tiondelar + ${10-a} tiondelar = 1 hel.`):(l===2?Q(`${F(b/10,1)} + 0,${a} =`,`${F((b+a)/10,1)}`,`Addera tiondelarna.`):Q(`0,${a} + 0,${b} =`,`${F((a*10+b)/100,2)}`,`0,${a}0 + 0,${b} = ${F((a*10+b)/100,2)}.`)); },
+        (l)=>dynAddKlur(l,4)
+      ),
+
+      // --- ÅK 5 (Matematik Beta) ---
+      T("m5_1",[5],"Åk 5: Decimaltal – Addition & Subtraktion (5,00 - 1,35)",
+        "Sätt alltid lika många decimaler på båda talen genom att fylla på med nollor längst bak (<code>5,00 - 1,35 = 3,65</code>).",
+        "⚡ <strong>Genvägen (Öres-kompisar upp till 100):</strong> Vid <code>4,00 - 1,35</code> fattas det 65 hundradelar upp till 2,00, och 2 hela upp till 4 → <code>2,65</code>!",
+        (l)=>{ let a=R(3,9), b=R(12,88)/100, c=R(2,8)/10; return l===1?Q(`${F(a+c,1)} - ${F(c,1)} =`,`${a}`,`Ta bort tiondelarna.`):(l===2?Q(`${a} - ${F(b,2)} =`,`${F(a-b,2)}`,`Tänk ${a},00 - ${F(b,2)} = ${F(a-b,2)}.`):Q(`${F(c,1)} + ${F(b,2)} =`,`${F(c+b,2)}`,`Fyll på nolla: ${F(c,2)} + ${F(b,2)}.`)); },
+        (l)=>dynAddKlur(l,5)
+      ),
+      T("m5_2",[5],"Åk 5: Tiohopp – Multiplikation & Division med 10, 100 och 1 000",
+        "Vid multiplikation med <code>10, 100, 1 000</code> flyttas kommat åt <strong>höger</strong>. Vid division flyttas kommat åt <strong>vänster</strong>.",
+        "⚡ <strong>Genvägen:</strong> Räkna antalet nollor i <code>10, 100, 1000</code> – exakt så många steg ska kommat hoppa!",
+        (l)=>{ let n=R(12,95)/10, m=P([10,100,1000]), k=R(15,650); return l===1?Q(`${F(n,1)} · ${m} =`,`${Math.round(n*m)}`,`Flytta kommat ${String(m).length-1} steg höger.`):Q(`${k} / ${m} =`,`${String(k/m).replace('.',',')}`,`Flytta kommat ${String(m).length-1} steg vänster.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m5_3",[5],"Åk 5: Sambandet Bråk – Decimaltal – Procent",
+        "<code>1/2 = 0,5 = 50 %</code> • <code>1/4 = 0,25 = 25 %</code> • <code>3/4 = 0,75 = 75 %</code> • <code>1/5 = 0,2 = 20 %</code> • <code>1/10 = 0,1 = 10 %</code>.",
+        "⚡ <strong>Genvägen (Förläng nämnaren till 100!):</strong> Vid <code>7/20</code> förlänger du med 5 → <code>35/100 = 35 %</code>!",
+        (l)=>{ let n=R(1,19), d=P([4,5,10,20,25,50]); if(n>=d) n=d-1; let f=100/d; return Q(`Skriv bråket ${n}/${d} i procent (och decimaltal):`,`${n*f} % (${F((n*f)/100,2)})`,`Förläng med ${f}: ${n*f}/100 = ${n*f} %.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m5_4",[5],"Åk 5: Bråkräkning – Förlänga, Förkorta & Addera bråk",
+        "För att addera bråk som <code>1/3 + 1/6</code> förlänger du så att båda får <strong>samma nämnare</strong>: <code>2/6 + 1/6 = 3/6 = 1/2</code>.",
+        "⚡ <strong>Genvägen:</strong> Du förändrar aldrig ett bråks värde om du multiplicerar eller dividerar täljare och nämnare med samma tal!",
+        (l)=>{ let d1=P([2,3,4,5]), k=P([2,3]), d2=d1*k, n1=R(1,d1-1), n2=R(1,d2-1); return Q(`${n1}/${d1} + ${n2}/${d2} =`,`${n1*k+n2}/${d2}`,`Förläng första bråket med ${k} till ${n1*k}/${d2}.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m5_5",[5],"Åk 5: Geometri – Area & Omkrets av rektangel och kvadrat",
+        "<strong>Omkrets (cm, m):</strong> Sträckan runt om (<code>2b + 2h</code>). <strong>Area (cm², m²):</strong> Ytan inuti figuren (<code>bas · höjd</code>).",
+        "⚡ <strong>Genvägen:</strong> <em>Omkrets = Staketet runt gräsmattan (+)</em>. <em>Area = Gräsmattans rutor inuti (·)</em>!",
+        (l)=>{ let b=R(4,12), h=R(3,9); return l<3?Q(`Rektangel ${b} cm × ${h} cm. Area och Omkrets?`,`A = ${b*h} cm², O = ${2*(b+h)} cm`,`A = ${b}·${h}, O = 2·(${b}+${h}).`):Q(`Rektangel med area ${b*h} m² och bas ${b} m. Omkrets?`,`${2*(b+h)} m`,`Höjd = ${b*h}/${b} = ${h} m → O = ${2*(b+h)} m.`); },
+        (l)=>dynMultKlur(l)
+      ),
+
+      // --- ÅK 6 (Matematik Gamma & NP Åk 6) ---
+      T("m6_1",[6],"Åk 6: Bråkräkning – Olika nämnare & Blandad form",
+        "Vid <code>2/3 + 1/4</code> förlänger du till minsta gemensamma nämnare (12): <code>8/12 + 3/12 = 11/12</code>. Blandad form: <code>2 1/4 = 9/4</code>.",
+        "⚡ <strong>Genvägen (Blandad form → Bråkform):</strong> Ta <code>(Heltalet · nämnaren + täljaren) / nämnaren</code>!",
+        (l)=>{ let [d1,d2]=P([[2,3],[3,4],[2,5],[3,5],[4,5]]), n1=R(1,d1-1), n2=R(1,d2-1), w=R(1,4); return l===1?Q(`Skriv ${w} ${n1}/${d1} i bråkform:`,`${w*d1+n1}/${d1}`,`(${w}·${d1}+${n1})/${d1}.`):Q(`${n1}/${d1} + ${n2}/${d2} =`,`${n1*d2+n2*d1}/${d1*d2}`,`Gemensam nämnare ${d1*d2}.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m6_2",[6],"Åk 6: Procenthuvudräkning & Prisförändringar (Rabatt)",
+        "Hitta alltid <strong>10 %</strong> först (dividera med 10) och <strong>5 %</strong> (hälften av 10 %). Då är <code>15 % = 10 % + 5 %</code>.",
+        "⚡ <strong>Genvägen (Procent-switchen!):</strong> <code>16 % av 25</code> är exakt samma sak som <code>25 % (en fjärdedel) av 16 = 4</code>!",
+        (l)=>{ let b=R(2,9)*20, p=P([15,20,25,30]), sw=P([12,16,24,36,48]); return l<3?Q(`${p} % av ${b} =`,`${(p*b)/100}`,`10 % är ${b/10} → ${p} % är ${(p*b)/100}.`):Q(`${sw} % av 25 =`,`${sw/4}`,`Byt plats: 25 % av ${sw} = ${sw/4}.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m6_3",[6],"Åk 6: Algebra – Uttryck, Mönster & Ekvationer (3x + 4 = 19)",
+        "I <code>3x + 4 = 19</code> betyder <code>3x</code> <em>3 gånger x</em>. Dra bort 4 på båda sidor (<code>3x = 15</code>) och dividera med 3 (<code>x = 5</code>).",
+        "⚡ <strong>Genvägen (Finger-knepet):</strong> Håll fingret över <code>3x</code> och fråga: <em>”Vad plus 4 blir 19?”</em> Jo, 15! Då är <code>x = 5</code>!",
+        (l)=>{ let a=R(2,7), x=R(2,11), b=R(3,15); return l===1?Q(`Lös ekvationen: x + ${b} = ${x+b}`,`x = ${x}`,`x = ${x+b} - ${b}.`):Q(`Lös ekvationen: ${a}x + ${b} = ${a*x+b}`,`x = ${x}`,`${a}x = ${a*x} → x = ${x}.`); },
+        (l)=>dynAddKlur(l,6)
+      ),
+      T("m6_4",[6],"Åk 6: Geometri – Triangelns area & Rätblockets volym (liter)",
+        "<strong>Triangelns area:</strong> <code>(basen · höjden) / 2</code>. <strong>Rätblockets volym:</strong> <code>längd · bredd · höjd</code>.",
+        "⚡ <strong>Genvägen:</strong> Kom ihåg att <code>1 dm³ = 1 liter</code>! Och i triangeln kan du halvera ett jämnt tal <em>innan</em> du multiplicerar!",
+        (l)=>{ let b=R(3,9)*2, h=R(3,8), w=R(2,5); return l<=2?Q(`Triangel med bas ${b} cm och höjd ${h} cm. Area?`,`${(b*h)/2} cm²`,`(${b}·${h})/2 = ${(b*h)/2} cm².`):Q(`Rätblock: ${b/2} dm × ${h} dm × ${w} dm. Volym i liter?`,`${(b/2)*h*w} liter`,`l·b·h = ${(b/2)*h*w} dm³ = liter.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m6_5",[6],"Åk 6: Skala (1:100) & Statistik (Medelvärde och Median)",
+        "<strong>Skala 1:100:</strong> 1 cm på ritningen är 100 cm (1 m) i verkligheten. <strong>Medelvärde:</strong> Summan delat med antalet.",
+        "⚡ <strong>Genvägen (Median):</strong> Glöm aldrig att <strong>sortera talen i storleksordning</strong> först innan du tar talet i mitten!",
+        (l)=>{ let cm=R(2,9), sc=P([50,100,200]), m=R(6,18); return l<=2?Q(`Skala 1:${sc}. En vägg är ${cm} cm på kartan. Verklig längd i meter?`,`${(cm*sc)/100} m`,`${cm}·${sc} = ${cm*sc} cm = ${(cm*sc)/100} m.`):Q(`Beräkna medelvärde och median för: ${m-4}, ${m+5}, ${m}, ${m-1}, ${m}`,`Medel = ${m}, Median = ${m}`,`Sortera först! Summa = ${5*m} → ${5*m}/5 = ${m}.`); },
+        (l)=>dynAddKlur(l,5)
+      ),
+
+      // --- ÅK 7 (Matematik X) ---
+      T("m7_1",[7],"Åk 7: Negativa tal & Prioriteringsregeln",
+        "<strong>Prioriteringsregeln:</strong> 1) Parentes, 2) Potens, 3) Mult/Div, 4) Add/Sub. Lika tecken ger plus: <code>a - (-b) = a + b</code> och <code>(-a)·(-b) = +ab</code>.",
+        "⚡ <strong>Genvägen:</strong> Två minustecken direkt bredvid varandra <code>- (-5)</code> smälter alltid ihop till ett stort <strong>plustecken (<code>+ 5</code>)</strong>!",
+        (l)=>{ let a=R(-12,12), b=R(2,9), c=R(2,6); return l===1?Q(`${a} - (-${b}) =`,`${a+b}`,`Dubbelminus blir plus.`):Q(`${Math.abs(a)+5} - ${b} · (-${c}) =`,`${Math.abs(a)+5+b*c}`,`Multiplikation först: (-${b})·(-${c})=+${b*c}.`); },
+        (l)=>dynAddKlur(l,7)
+      ),
+      T("m7_2",[7],"Åk 7: Multiplikation & Division med små decimaltal (0,5 / 0,2 / 0,1)",
+        "Vid division med decimaltal (<code>12 / 0,4</code>) förlänger du både täljare och nämnare med 10 så nämnaren blir heltal: <code>120 / 4 = 30</code>.",
+        "⚡ <strong>Genvägen:</strong> Att dividera med <code>0,5</code> är att <strong>dubbla</strong>! Att dividera med <code>0,1</code> är att multiplicera med <strong>10</strong>!",
+        (l)=>{ let d=P([2,4,5]), q=R(3,9); return l===1?Q(`${q} / 0,5 =`,`${q*2}`,`Det går 2 halvor på varje hel.`):Q(`${d*q} / 0,${d} =`,`${q*10}`,`Förläng med 10: ${d*q*10}/${d} = ${q*10}.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m7_3",[7],"Åk 7: Bråkräkning – Olika nämnare, Andelar & Bråkform",
+        "Förläng till minsta gemensamma nämnare vid addition/subtraktion. Vid multiplikation av bråk: <code>(a/b) · (c/d) = (a·c)/(b·d)</code>.",
+        "⚡ <strong>Genvägen:</strong> Förkorta alltid bråket så långt det går genom att dela täljare och nämnare med samma tal!",
+        (l)=>{ let [d1,d2]=P([[2,3],[3,4],[2,5],[3,5],[4,5]]), n1=R(1,d1-1), n2=R(1,d2-1); return Q(`${n1}/${d1} + ${n2}/${d2} =`,`${n1*d2+n2*d1}/${d1*d2}`,`Gemensam nämnare ${d1*d2}.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m7_4",[7],"Åk 7: Algebra – Förenkla uttryck & Lösa ekvationer",
+        "Samla <code>x</code>-termer för sig och siffertermer för sig (tecknet framför hör alltid till termen!).",
+        "⚡ <strong>Genvägen:</strong> Gör alltid motsatt räkneoperation på båda sidor om likhetstecknet!",
+        (l)=>{ let a=R(4,9), b=R(2,a-1), c=R(3,12), x=R(2,9); return l===1?Q(`Förenkla: ${a}x + ${c} - ${b}x - 2 =`,`${a-b}x + ${c-2}`,`Samla x-termer och siffertermer.`):Q(`Lös ekvationen: ${a}x - ${c} = ${a*x-c}`,`x = ${x}`,`${a}x = ${a*x} → x = ${x}.`); },
+        (l)=>dynAddKlur(l,8)
+      ),
+      T("m7_5",[7],"Åk 7: Geometri – Vinkelsummor, Trianglar & Ytenheter (m² ↔ cm²)",
+        "Vinkelsumman i en triangel är alltid <strong>180°</strong> och i en fyrhörning <strong>360°</strong>. För areaenheter går det <strong>100</strong> på varje steg (<code>1 m² = 100 dm²</code>).",
+        "⚡ <strong>Genvägen (Area-fällan!):</strong> Eftersom <code>1 dm = 10 cm</code> är <code>1 dm² = 10 cm · 10 cm = 100 cm²</code> (två nollor per steg i kvadrat)!",
+        (l)=>{ let v1=R(35,80), v2=R(35,75), dm2=R(2,15); return l<=2?Q(`Två vinklar i en triangel är ${v1}° och ${v2}°. Tredje vinkeln?`,`${180-v1-v2}°`,`180° - (${v1}° + ${v2}°) = ${180-v1-v2}°.`):Q(`Omvandla ${dm2} dm² till cm² (obs: 1 dm² = 100 cm²):`,`${dm2*100} cm²`,`Multiplicera med 100.`); },
+        (l)=>dynMultKlur(l)
+      ),
+
+      // --- ÅK 8 (Matematik Y) ---
+      T("m8_1",[8],"Åk 8: Procentuell förändring, Förändringsfaktor (FF) & Ränta",
+        "Utgå från <code>100 % = 1,00</code>. Ökning med 15 % ger <code>FF = 1,15</code>; minskning med 20 % ger <code>FF = 0,80</code>. Procentuell ändring = <code>Skillnad / Ursprungsvärde</code>.",
+        "⚡ <strong>Genvägen:</strong> Dividera alltid prisskillnaden med det <strong>GAMLA (ursprungliga)</strong> värdet!",
+        (l)=>{ let inc=Math.random()>.5, p=P([5,12,15,20,25,30]), o=P([200,400,500]); return l===1?Q(`Skriv förändringsfaktorn vid ${inc?'ökning':'minskning'} med ${p} %:`,`${F(inc?1+p/100:1-p/100,2)}`,`100 % ${inc?'+':'-'} ${p} %.`):Q(`Priset höjs från ${o} kr till ${o+o*p/100} kr. Höjning i procent?`,`${p} %`,`Skillnad ${o*p/100} / ${o} = ${p} %.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m8_2",[8],"Åk 8: Potenser, Potenslagar & Grundpotensform (a · 10ⁿ)",
+        "<strong>Potenslagar:</strong> <code>10ᵃ · 10ᵇ = 10ᵃ⁺ᵇ</code> och <code>10ᵃ / 10ᵇ = 10ᵃ⁻ᵇ</code>. <strong>Grundpotensform:</strong> <code>a · 10ⁿ</code> där <code>1 ≤ a < 10</code>.",
+        "⚡ <strong>Genvägen:</strong> Alla tal (utom 0) upphöjt till 0 är ALLTID <strong>1</strong> (<code>8⁰ = 1</code>)!",
+        (l)=>{ let a=R(4,8), b=R(2,6), c=R(2,4), d=R(12,95)/10; return l<=2?Q(`Förenkla: (10^${a} · 10^${b}) / 10^${c} =`,`10^${a+b-c}`,`Exponenter: ${a}+${b}-${c}=${a+b-c}.`):Q(`Skriv ${Math.round(d*Math.pow(10,a)).toLocaleString('sv-SE')} i grundpotensform:`,`${F(d,1)} · 10^${a}`,`Tal mellan 1 och 10 · 10^${a}.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m8_3",[8],"Åk 8: Algebra – Parenteser & Ekvationer med x på båda sidor",
+        "Multiplicera in i parentes: <code>3(2x - 4) = 6x - 12</code>. Minus framför parentes byter tecken inuti: <code>5x - (2x - 3) = 3x + 3</code>.",
+        "⚡ <strong>Genvägen:</strong> Samla alltid <code>x</code> på den sida där det finns <strong>flest x från början</strong> så slipper du negativa x-termer!",
+        (l)=>{ let x=R(2,9), a=R(5,9), b=R(2,a-2), c=R(2,10), d=(a-b)*x-c; return l===1?Q(`Förenkla: ${a}x - (${b}x - ${c}) =`,`${a-b}x + ${c}`,`Byt tecken inuti parentesen.`):Q(`Lös ekvationen: ${a}x - ${c} = ${b}x + ${d}`,`x = ${x}`,`${a-b}x = ${d+c} → x = ${x}.`); },
+        (l)=>dynAddKlur(l,9)
+      ),
+      T("m8_4",[8],"Åk 8: Geometri – Pythagoras sats (a² + b² = c²)",
+        "I en rätvinklig triangel är <code>katet² + katet² = hypotenusa²</code> (<code>a² + b² = c²</code>), där <code>c</code> är längsta sidan mittemot räta vinkeln.",
+        "⚡ <strong>Genvägen:</strong> Lär dig de tre klassiska Pythagoras-trianglarna utantill: <strong>(3, 4, 5)</strong>, <strong>(6, 8, 10)</strong> och <strong>(5, 12, 13)</strong>!",
+        (l)=>{ let [a,b,c]=P([[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15]]); return l<=2?Q(`Rätvinklig triangel med kateter ${a} cm och ${b} cm. Hypotenusa c?`,`${c} cm`,`√(${a}²+${b}²) = √${c*c} = ${c} cm.`):Q(`Hypotenusan är ${c} m och en katet är ${a} m. Andra kateten b?`,`${b} m`,`√(${c}²-${a}²) = √${b*b} = ${b} m.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m8_5",[8],"Åk 8: Geometri – Cirkelns area och omkrets (π · r², π · d)",
+        "<strong>Cirkelns omkrets:</strong> <code>O = π · d = 2 · π · r</code>. <strong>Cirkelns area:</strong> <code>A = π · r²</code> (där <code>π ≈ 3,14</code> och <code>r</code> är halva diametern).",
+        "⚡ <strong>Genvägen:</strong> Se alltid upp om du fått <strong>diametern</strong> – halvera den direkt till <strong>radien</strong> innan du räknar arean!",
+        (l)=>{ let r=R(2,10); return Q(`Cirkel med radie r = ${r} cm (diameter ${2*r} cm). Exakt area och omkrets (med π)?`,`A = ${r*r}π cm², O = ${2*r}π cm`,`A = π·${r}² = ${r*r}π, O = π·${2*r}.`); },
+        (l)=>dynMultKlur(l)
+      ),
+
+      // --- ÅK 9 (Matematik Z & NP Åk 9) ---
+      T("m9_1",[9],"Åk 9: Linjära funktioner (y = kx + m) & Riktningskoefficient (k)",
+        "I <code>y = kx + m</code> är <strong>k lutningen</strong> (<code>k = (y₂ - y₁)/(x₂ - x₁)</code>) och <strong>m skärningen med y-axeln</strong> (då <code>x = 0</code>).",
+        "⚡ <strong>Genvägen:</strong> Två linjer är <strong>parallella</strong> om och endast om de har exakt <strong>samma k-värde</strong>!",
+        (l)=>{ let k=R(-4,5)||2, m=R(1,9); return l===1?Q(`Ange k-värde och m-värde för linjen y = ${k}x + ${m}:`,`k = ${k}, m = ${m}`,`Koefficienten framför x är k.`):Q(`Bestäm k-värdet för linjen genom (1, ${k+m}) och (4, ${4*k+m}):`,`k = ${k}`,`k = (${4*k+m}-${k+m})/(4-1) = ${k}.`); },
+        (l)=>dynAddKlur(l,10)
+      ),
+      T("m9_2",[9],"Åk 9: Algebra – Kvadrerings-/Konjugatregler & Faktorisering",
+        "<strong>Konjugatregeln:</strong> <code>(a + b)(a - b) = a² - b²</code>. <strong>Faktorisera:</strong> Bryt ut största gemensamma faktor: <code>6x² + 9x = 3x(2x + 3)</code>.",
+        "⚡ <strong>Genvägen:</strong> Med konjugatregeln räknar du <code>51² - 49² = (51+49)(51-49) = 100 · 2 = 200</code> i huvudet!",
+        (l)=>{ let a=R(2,9), k=R(2,6); return l===1?Q(`Bryt ut största faktor: ${k}x² + ${k*a}x =`,`${k}x(x + ${a})`,`Dela båda termerna med ${k}x.`):Q(`Utveckla med konjugatregeln: (x + ${a})(x - ${a}) =`,`x² - ${a*a}`,`x² - ${a}² = x² - ${a*a}.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m9_3",[9],"Åk 9: Ekvationssystem (Två obekanta: x och y)",
+        "Lös med <strong>substitutionsmetoden</strong> (ersätt en variabel) eller <strong>additionsmetoden</strong> (addera ekvationerna så en variabel tar ut sig själv).",
+        "⚡ <strong>Genvägen (Additionsmetoden):</strong> I <code>x + y = 12</code> och <code>x - y = 4</code> adderar du rakt ner → <code>2x = 16 → x = 8, y = 4</code>!",
+        (l)=>{ let x=R(4,12), y=R(1,x-1); return Q(`Lös ekvationssystemet: x + y = ${x+y} och x - y = ${x-y}`,`x = ${x}, y = ${y}`,`Addera ekvationerna: 2x = ${2*x} → x = ${x}, y = ${y}.`); },
+        (l)=>dynAddKlur(l,10)
+      ),
+      T("m9_4",[9],"Åk 9: Upprepad procentuell förändring & Exponentiella funktioner (C · a^x)",
+        "Vid upprepade förändringar multipliceras förändringsfaktorerna: <code>y = C · aˣ</code> där <code>C</code> är startvärdet och <code>a</code> är förändringsfaktorn.",
+        "⚡ <strong>Genvägen:</strong> Höjs en vara med 25 % (<code>1,25</code>) och sänks med 20 % (<code>0,80</code>) är den totala faktorn <code>1,25 · 0,80 = 1,00</code> (oförändrat)!",
+        (l)=>{ let c=P([10000,50000,100000]), p=P([5,10,15,20]), t=R(3,8), inc=Math.random()>.5; let ff=F(inc?1+p/100:1-p/100,2); return Q(`Värdet ${c} kr ${inc?'ökar':'minskar'} med ${p} % per år i ${t} år. Teckna uttryck:`,`${c} · ${ff}^${t}`,`Startvärde · FF^antal år.`); },
+        (l)=>dynMultKlur(l)
+      ),
+      T("m9_5",[9],"Åk 9: Rymdgeometri (Cylinder, Kon, Pyramid) & Area-/Volymskala",
+        "<strong>Cylinder:</strong> <code>V = π·r²·h</code>. <strong>Spetsiga kroppar (Kon & Pyramid):</strong> <code>V = (Basarea · h) / 3</code>. <strong>Skala:</strong> Areaskala = <code>Längdskala²</code>, Volymskala = <code>Längdskala³</code>.",
+        "⚡ <strong>Genvägen:</strong> Dubblas alla sidor (längdskala <code>2:1</code>) blir arean <code>2² = 4</code> ggr större och volymen <code>2³ = 8</code> ggr större!",
+        (l)=>{ let b=R(4,12), h=R(3,9), k=P([2,3,4]); return l<=2?Q(`Pyramid/kon med basarea ${b} cm² och höjd ${h} cm. Volym?`,`${(b*h)/3} cm³`,`(Basarea · höjd) / 3 = ${(b*h)/3} cm³.`):Q(`Längdskalan mellan två likformiga kroppar är ${k}:1. Areaskala och Volymskala?`,`Area ${k*k}:1, Volym ${k*k*k}:1`,`${k}² = ${k*k} och ${k}³ = ${k*k*k}.`); },
+        (l)=>dynMultKlur(l)
+      )
+    ];
+  }
+
+  // -------------------------------------------------------------------------
+  // 2. SVENSKA – Uppdelad efter Lågstadiet (1–3), Mellan (4–6) & Hög (7–9)
+  // -------------------------------------------------------------------------
+  if (s === 'svenska') return [
+    T("sv_l1",[1,2,3],`Åk ${g}: Lång & Kort vokal – Dubbelteckning Bas (s/ss, k/ck, t/tt)`,
+      "Efter <strong>lång vokal</strong> skrivs EN konsonant (<em>glas, tak</em>). Efter <strong>kort vokal</strong> skrivs TVÅ konsonanter (<em>glass, tack</em>).",
+      "⚡ <strong>Genvägen:</strong> Kort k-ljud stavas alltid med <code>ck</code> (aldrig kk)!",
+      (l)=>adaptQ(...P([
+        ["Vi åt varsin gla___ i solen.","s / ss","glass (ss)","Kort a-ljud ger ss."],
+        ["Drick ett gla___ kallt vatten!","s / ss","glas (s)","Långt a-ljud ger s."],
+        ["Stort ta___ för hjälpen!","k / ck","tack (ck)","Kort a-ljud ger ck."],
+        ["Katten satt på husets ta___.","k / ck","tak (k)","Långt a-ljud ger k."],
+        ["Har du se___ min nya cykel?","t / tt","sett (tt)","Kort e-ljud ger tt."],
+        ["Vi målade om vår vita vä___.","g / gg","vägg (gg)","Kort ä-ljud ger gg."]
+      ]),l),
+      (l)=>pickKlur([["Skriv två ordpar där vokallängden ändrar ordets betydelse!","glas–glass, tak–tack, väg–vägg","Ett vs två tecken."],["Varför stavas 'tacka' med ck och inte kk?","Dubbelt k-ljud tecknas alltid ck","Svensk stavningsregel."],["Vad händer i sammansatta ord som glass + strut?","Man skriver aldrig tre s i rad → glasstrut","Trekonsonantsregeln."]],l)
+    ),
+    T("sv_l2",[1,2,3,4,5,6],`Åk ${g}: Dubbelteckning med M/MM, N/NN & Undantagsorden`,
+      "Mellan två vokaler efter kort vokal skrivs <code>mm</code> och <code>nn</code> (<em>komma, känna</em>). I <strong>slutet av ord</strong> skrivs nästan aldrig <code>mm</code> (<em>kom, hem, rum, tom</em>).",
+      "⚡ <strong>Genvägen:</strong> Ramsan <em>\"Gamla kungen äter aldrig kolbullar\"</em> enkeltecknas – och framför <code>-d</code> (<em>kände</em>) tas ett <code>n</code> bort!",
+      (l)=>adaptQ(...P([
+        ["Vi ska snart ko___a hem.","m / mm","komma (mm)","Mellan två vokaler skrivs mm."],
+        ["När ko___ du hem igår?","m / mm","kom (m)","Inget mm i slutet av ord."],
+        ["Mitt ru___ är nystädat.","m / mm","rum (m)","Slut-m enkeltecknas."],
+        ["Jag städade ru___et igår.","m / mm","rummet (mm)","Mellan vokaler skrivs mm."],
+        ["De ga___la husen är fina.","m / mm","gamla (m)","Undantagsordet gamla."],
+        ["Han kommer a___drig för sent, han är a___tid i tid.","l / ll","aldrig (l), alltid (ll)","Aldrig har ett l, alltid har två."],
+        ["Kan du kä___a lukten av bullar?","n / nn","känna (nn)","Mellan vokaler skrivs nn."],
+        ["Han kä___de sig trött.","n / nn","kände (n)","Framför -d tas ett n bort."]
+      ]),l),
+      (l)=>pickKlur([["Varför stavas 'ett rum' med ett m men 'rummet' med två m?","Slut-m enkeltecknas, mellan vokaler skrivs mm","Regeln för m."],["Varför stavas 'känna' med nn men 'kände' med ett n?","Framför konsonanten -d tas ett n bort","Samma i bränna → brände."],["Vilka undantagsord finns i 'Gamla kungen äter aldrig'?","gamla, kungen, äter, aldrig","Enkeltecknas."]],l)
+    ),
+    T("sv_l3",[1,2,3,4,5],`Åk ${g}: Stavning av J-ljudet (g, j, dj, hj, lj)`,
+      "Framför mjuka vokaler (<code>E, I, Y, Ä, Ö</code>) uttalas <code>G</code> som <code>J</code> (<em>gick, gärna</em>). Vissa ord har stumt <code>d, h</code> eller <code>l</code> före <code>j</code>.",
+      "⚡ <strong>Genvägen:</strong> De 5 <strong>HJ-orden</strong>: <em>hjälpa, hjärna, hjärta, hjul, hjälm</em>. De 5 <strong>LJ-orden</strong>: <em>ljus, ljud, ljuga, ljum, ljung</em>!",
+      (l)=>adaptQ(...P([
+        ["Tänd ett ___us i mörkret!","g / j / lj","ljus (lj)","Stumt l framför j."],
+        ["Använd alltid cykel___älm!","g / hj / j","hjälm (hj)","Ett av de 5 hj-orden."],
+        ["Mitt ___ärta slår snabbt.","hj / g / j","hjärta (hj)","Stavas med hj."],
+        ["Använd ___ärnan – jag hjälper dig ___ärna!","hj / g","hjärnan (hj), gärna (g)","Organet = hj, med glädje = g."],
+        ["Vi såg vilda ___ur i skogen.","dj / g / j","djur (dj)","Djur och djup stavas med dj."],
+        ["Bilen har fyra runda ___ul.","j / hj","hjul (hj)","Fordonshjul = hj."]
+      ]),l),
+      (l)=>pickKlur([["Räkna upp de fem klassiska HJ-orden!","hjälpa, hjärna, hjärta, hjul, hjälm","Stumt h."],["Skillnad mellan 'hjärna' och 'gärna'?","Hjärna (hj) i huvudet; gärna (g) = med glädje","Homofoner."],["Vilka är de fem mjuka vokalerna?","E, I, Y, Ä, Ö","Gör g till j-ljud."]],l)
+    ),
+    T("sv_m1",[3,4,5,6,7],`Åk ${g}: SJ-ljudet (sj, sk, stj, skj) & TJ-ljudet (k, tj, kj)`,
+      "Framför mjuka vokaler (<code>E, I, Y, Ä, Ö</code>) stavas sj-ljudet oftast <code>sk</code> (<em>skidor</em>) och tj-ljudet <code>k</code> (<em>kyrka</em>). Framför hårda vokaler (<code>A, O, U, Å</code>) skrivs <code>sj</code> och <code>tj</code>.",
+      "⚡ <strong>Genvägen:</strong> Lär dig specialorden med <strong>STJ</strong> (<em>stjärna, stjäla, stjälk</em>), <strong>SKJ</strong> (<em>skjorta, skjuta</em>) och <strong>KJ</strong> (<em>kjol</em>)!",
+      (l)=>adaptQ(...P([
+        ["En klar ___ärna på himlen.","sj / sk / stj","stjärna (stj)","Stavas med stj-."],
+        ["En vit ___orta.","sj / skj / sk","skjorta (skj)","Stavas med skj-."],
+        ["Vi åkte ___idor i fjällen.","sj / sk","skidor (sk)","Framför mjuk vokal (i)."],
+        ["Läkaren på ___ukhuset.","sj / sk","sjukhuset (sj)","Framför hård vokal (u)."],
+        ["En ___ugolapp och en ny ___ol.","k / tj / kj","tjugolapp (tj), kjol (kj)","Hård vokal = tj, kjol = kj."],
+        ["Det var ___yligt vid ___yrkan.","k / tj","kyligt, kyrkan (k)","Framför mjuk vokal (y)."]
+      ]),l),
+      (l)=>pickKlur([["Varför stavas 'skidor' med sk men 'sjuk' med sj?","I är mjuk vokal (sk), U är hård vokal (sj)","Vokalregeln."],["Nämn tre ord som stavas med stj-!","stjärna, stjäla, stjälk","Stj-ord."],["Varför uttalas K som tj-ljud i 'kemi'?","E är en mjuk vokal","Förmjukning."]],l)
+    ),
+    T("sv_m2",[1,2,3,4,5,6,7,8,9],`Åk ${g}: Ordklasser (Substantiv, Verb, Adjektiv${g>=4?', Adverb & Pronomen':''})`,
+      "<strong>Substantiv:</strong> Saker (<em>en/ett</em>). <strong>Verb:</strong> Gör-ord (<em>att</em>). <strong>Adjektiv:</strong> Beskriver ett substantiv. <strong>Adverb:</strong> Beskriver ett verb (HUR något görs).",
+      "⚡ <strong>Genvägen:</strong> Beskriver <em>vackert</em> en sak (<em>ett vackert hus</em>) = <strong>Adjektiv</strong>. Beskriver det hur någon sjunger (<em>sjunger vackert</em>) = <strong>Adverb</strong>!",
+      (l)=>adaptQ(...P([
+        ["Ordklass för ordet i klammer: Hunden [springer] snabbt.","Verb / Adjektiv","Verb","Att springa (gör-ord)."],
+        ["Ordklass: Vi bor i ett [vackert] hus.","Adjektiv / Adverb","Adjektiv","Beskriver substantivet hus."],
+        ["Ordklass: Hon sjunger otroligt [vackert].","Adjektiv / Adverb","Adverb","Beskriver HUR hon sjunger (verbet)!"],
+        ["Ordklass: [Skolan] ligger nära [under] eken.","Substantiv / Preposition","Substantiv (skolan), Preposition (under)","Ting resp. lägesord."],
+        ["Ordklass: [Hon] gav [honom] boken.","Pronomen / Verb","Pronomen","Ersätter namn."],
+        ["Komparera adjektivet 'bra' och 'liten':","3 former","bra–bättre–bäst, liten–mindre–minst","Oregelbunden komparation."]
+      ]),l),
+      (l)=>pickKlur([["Hur testar du om ett ord är substantiv eller verb?","En/ett framför substantiv; att framför verb","Enkelt test."],["Varför är 'snabbt' adjektiv i 'ett snabbt tåg' men adverb i 'tåget kör snabbt'?","Första beskriver tåget, andra beskriver verbet kör","Adjektiv vs adverb."],["Vad gör ett pronomen?","Ersätter substantiv/namn","Ex: han, hon, de."]],l)
+    ),
+    T("sv_h1",[4,5,6,7,8,9],`Åk ${g}: Satsdelar (Subjekt, Predikat, Objekt) & De / Dem`,
+      "1. <strong>Predikat:</strong> Vad händer? (verbet). 2. <strong>Subjekt:</strong> Vem + predikat? 3. <strong>Objekt:</strong> Vad + predikat + subjekt?",
+      "⚡ <strong>Genvägen (VI/OSS-knepet):</strong> Byt ut mot <strong>VI</strong> (= skriv <code>de</code>) eller <strong>OSS</strong> (= skriv <code>dem</code>)!",
+      (l)=>adaptQ(...P([
+        ["Ta ut PREDIKATET: 'På kvällen läste Astrid en bok.'","läste / bok","läste","Vad hände? (verbet)."],
+        ["Ta ut SUBJEKTET: 'På kvällen läste Astrid en bok.'","Astrid / kvällen","Astrid","Vem läste?"],
+        ["Ta ut DIREKT OBJEKT: 'På kvällen läste Astrid en bok.'","en bok / kvällen","en bok","Vad läste Astrid?"],
+        ["De eller Dem: '___ vann bortamatchen igår.'","De / Dem","De","Testa 'Vi vann' → De!"],
+        ["De eller Dem: 'Tränaren gav ___ beröm.'","de / dem","dem","Testa 'gav oss' → dem!"],
+        ["Sin eller Hans: 'Erik tog på sig ___ egen hjälm.'","sin / hans","sin","Syftar tillbaka på subjektet Erik."]
+      ]),l),
+      (l)=>pickKlur([["Vilken satsdel letar du alltid upp först?","Predikatet (verbet)","Nyckeln till satsen."],["De eller dem: 'Vi bjöd ___ på fika' med VI/OSS-knepet?","'bjöd oss' → alltså dem!","Vi=de, oss=dem."],["Skillnad mellan 'Leo tog sin cykel' och 'Leo tog hans cykel'?","Sin = Leos egen; hans = någon annans","Syftning."]],l)
+    ),
+    T("sv_h2",[6,7,8,9],`Åk ${g}: Ordförståelse, Synonymer, Motsatsord & NP-begrepp`,
+      "<strong>Synonymer</strong> = ord med samma betydelse. <strong>Antonymer</strong> = motsatsord. <strong>Idiom</strong> = fasta uttryck med bildlig betydelse.",
+      "⚡ <strong>Genvägen:</strong> Titta på ordets förled (<em>o-, miss-, anti-</em>) och sammanhanget i meningen för att lista ut svåra ord på Nationella proven!",
+      (l)=>adaptQ(...P([
+        ["Synonym till 'obligatorisk':","frivillig / tvingande","tvingande (måste göras)","Motsats till frivillig."],
+        ["Synonym till 'konsekvens':","orsak / följd","följd (resultat)","Orsak → Konsekvens."],
+        ["Synonym till 'skeptisk':","tvivlande / övertygad","tvivlande / tveksam","Att ifrågasätta."],
+        ["Synonym till 'kontinuerlig':","tillfällig / fortlöpande","pågående utan avbrott","Sker hela tiden."],
+        ["Motsatsord till 'konkret':","abstrakt / tydlig","abstrakt","Påtagligt ↔ abstrakt."],
+        ["Motsatsord till 'optimist':","realist / pessimist","pessimist","Ser ljust vs mörkt på saker."],
+        ["Idiom: Vad betyder 'att ha is i magen'?","Lugn / Rädd","Att hålla sig lugn i en pressad situation","Talesätt."]
+      ]),l),
+      (l)=>pickKlur([["Vad är skillnaden mellan 'partisk' och 'objektiv'?","Partisk = tar parti för en sida; Objektiv = saklig och neutral","Viktigt NP-ordpar."],["Hur ändrar kommatecknet betydelsen i: 'Vi ska äta, farmor!' vs 'Vi ska äta farmor!'?","Kommatecknet räddar livet på farmor!","Skiljetecken."],["Vad är en 'satsradning' och hur rättar man den?","När två huvudsatser sätts ihop med bara kommatecken – sätt punkt eller bindeord (och/men/för)!","Vanligt skrivfel."]],l)
+    )
+  ];
+
+  // -------------------------------------------------------------------------
+  // 3. ENGELSKA – Anpassad för Låg (1–3), Mellan (4–6) & Hög (7–9)
+  // -------------------------------------------------------------------------
+  if (s === 'engelska') return [
+    T("en_l1",[1,2,3,4],`Åk ${g}: Artiklar (A / An) & Basordförråd`,
+      "<code>a</code> framför konsonantljud (<em>a dog, a car</em>), <code>an</code> framför vokalljud (<em>an apple, an orange</em>).",
+      "⚡ <strong>Genvägen:</strong> Det är <strong>UTTALET</strong> (ljudet) i början av ordet som styr om det blir <code>a</code> eller <code>an</code>!",
+      (l)=>adaptQ(...P([
+        ["___ apple and ___ banana.","a / an","an apple, a banana","Vokalljud (an) vs konsonantljud (a)."],
+        ["___ elephant and ___ lion.","a / an","an elephant, a lion","E är vokalljud → an."],
+        ["___ orange book and ___ red pen.","a / an","an orange book, a red pen","Orange börjar på vokalljud."],
+        ["Wait ___ hour! (stumt h)","a / an","an hour","Börjar på vokalljud → an."],
+        ["She wears ___ uniform.","a / an","a uniform","Uttalas 'ju-' (konsonantljud) → a."]
+      ]),l),
+      (l)=>pickKlur([["Varför heter det 'an apple' med an, men 'a red apple' med a?","Ordet direkt efter artikeln ('red') börjar med konsonantljud!","Artikeln styrs av nästa ord."],["Varför heter det 'an hour' men 'a university'?","Ljudet styr! Hour = vokalljud, university = j-ljud","Uttalsregel."],["Vad heter veckans sju dagar på engelska (och skrivs de med stor eller liten bokstav)?","Monday–Sunday (alltid med STOR bokstav på engelska!)","Stor bokstav på dagar/månader."]],l)
+    ),
+    T("en_1",[1,2,3,4,5,6],`Åk ${g}: Verbet Be – Am / Is / Are${g>=4?' & Was / Were':''}`,
+      "<strong>Nutid:</strong> <code>I am</code> • <code>he/she/it is</code> • <code>we/you/they are</code>. <strong>Dåtid:</strong> <code>I/he/she/it was</code> • <code>we/you/they were</code>.",
+      "⚡ <strong>Genvägen:</strong> Ordet <strong>You</strong> tar ALLTID <code>are</code> i nutid och <code>were</code> i dåtid!",
+      (l)=>adaptQ(...P([
+        ["She ___ my best friend.","am / is / are","is","He/she/it tar is."],
+        ["My parents ___ at work.","am / is / are","are","Plural (they) tar are."],
+        ["I ___ ready now.","am / is / are","am","I am."],
+        ["Where ___ you yesterday?","was / were","were","You tar alltid were i dåtid!"],
+        ["The weather ___ cold last week.","was / were","was","It tar was."]
+      ]),l),
+      (l)=>pickKlur([["Varför heter det 'My family IS' men 'My friends ARE'?","Family är ental (it), friends är flertal (they)","Ental vs flertal."],["Varför är 'Where was you?' fel?","You kräver alltid were!","Grammatikregel."],["Översätt: 'Det var kallt igår, men det är varmt idag.'","It was cold yesterday, but it is warm today.","Was → is."]],l)
+    ),
+    T("en_2",[2,3,4,5,6,7],`Åk ${g}: Nutid (Present Simple med -s) & Have / Has`,
+      "I nutid får verbet ändelsen <code>-s</code> vid <strong>he, she, it</strong> (<em>he plays, she lives</em>). För 'ha' gäller <code>he/she/it has</code> och <code>I/we/you/they have</code>.",
+      "⚡ <strong>Genvägen:</strong> <em>\"He, she, it – s:et ska med!\"</em>",
+      (l)=>adaptQ(...P([
+        ["Emma ___ the piano every day.","play / plays","plays","Emma = she → -s."],
+        ["My friends ___ in Lund.","live / lives","live","They → inget -s."],
+        ["He ___ his best at school.","try / tries","tries","Konsonant + y blir -ies."],
+        ["My brother ___ a new bike.","have / has","has","He → has."],
+        ["We ___ two dogs.","have / has","have","We → have."]
+      ]),l),
+      (l)=>pickKlur([["Varför heter det 'The dog barks' men 'The dogs bark'?","En hund (it) ger -s på verbet; flera hundar (they) ger inget -s","3:e person ental."],["Hur stavas 'go' och 'watch' efter he/she/it?","goes, watches","Får -es."],["Skillnad på 'I read' och 'I am reading'?","Vana vs pågår just nu","Enkel vs pågående nutid."]],l)
+    ),
+    T("en_3",[4,5,6,7,8,9],`Åk ${g}: Frågor & Nekande med Do / Does & Did`,
+      "Använd <code>do/does</code> i nutid och <code>did</code> i dåtid vid frågor och <em>not</em>.",
+      "⚡ <strong>Genvägen (DOES/DID-dammsugaren!):</strong> Så fort <code>does, doesn't, did, didn't</code> finns med i meningen står huvudverbet ALLTID i ren grundform (<code>Did you go?</code>)!",
+      (l)=>adaptQ(...P([
+        ["___ your sister play handball?","Do / Does","Does","She → Does."],
+        ["She doesn't ___ coffee.","like / likes","like","Grundform efter doesn't!"],
+        ["Where ___ you go yesterday?","do / did","did","Yesterday = dåtid."],
+        ["Did you ___ the movie?","see / saw","see","Grundform efter Did!"],
+        ["We didn't ___ the match.","win / won","win","Grundform efter didn't."]
+      ]),l),
+      (l)=>pickKlur([["Rätta felen: 'He don't plays football.'","He doesn't play football.","Doesn't + grundform."],["Rätta felet: 'Did she bought a jacket?'","Did she BUY a jacket?","Ingen dubbel dåtid."],["Översätt: 'Vi såg inte filmen igår.'","We didn't see the movie yesterday.","didn't + see."]],l)
+    ),
+    T("en_4",[4,5,6,7,8,9],`Åk ${g}: Oregelbundna verb (Irregular Verbs – 3 former)`,
+      "Oregelbundna verb byter vokal i dåtid: <strong>Nutid – Dåtid (igår) – Supinum (efter have/has/had)</strong>.",
+      "⚡ <strong>Genvägen:</strong> Gruppera efter ljudmönster: <code>sing–sang–sung</code>, <code>drink–drank–drunk</code> och <code>buy–bought–bought</code>!",
+      (l)=>{
+        const v=P([["go","went","gone","gå/åka"],["see","saw","seen","se"],["eat","ate","eaten","äta"],["take","took","taken","ta"],["write","wrote","written","skriva"],["buy","bought","bought","köpa"],["think","thought","thought","tänka"],["catch","caught","caught","fånga"],["sing","sang","sung","sjunga"],["drink","drank","drunk","dricka"],["swim","swam","swum","simma"],["run","ran","run","springa"],["know","knew","known","veta"],["give","gave","given","ge"]]);
+        return l===1?Q(`Dåtid av '${v[0]}' (${v[3]}): Yesterday I ___ (${v[0]} / ${v[1]})`,v[1],`Past simple är ${v[1]}.`):Q(`Böj '${v[0]}' (${v[3]}): ${v[0]} – ________ – ________`,`${v[1]} – ${v[2]}`,`Dåtid: ${v[1]}, efter have/has: ${v[2]}.`);
+      },
+      (l)=>pickKlur([["Vilka tre korta verb ändras inte alls i dåtid?","cut, put, hit (även let, set, cost)","Samma i alla 3 former."],["När används form 2 (went) respektive form 3 (gone)?","Form 2 = igår; Form 3 = efter have/has/had","Dåtid vs perfekt."],["Hur uttalas dåtidsformen av 'read'?","Uttalas 'redd' (men stavas read)","Låter som färgen red."]],l)
+    ),
+    T("en_5",[5,6,7,8,9],`Åk ${g}: Grammatikfällor – Much/Many, Who/Which & Its/It's`,
+      "<strong>Many</strong> = räknebara i plural; <strong>Much</strong> = oräknebara (<em>money, time, homework</em>). <strong>Who</strong> = människor; <strong>Which</strong> = saker.",
+      "⚡ <strong>Genvägen:</strong> Apostrof i <code>it's</code>, <code>you're</code>, <code>they're</code> betyder ALLTID att ett verb gömmer sig där (<em>it is, you are, they are</em>)!",
+      (l)=>adaptQ(...P([
+        ["How ___ money do you have?","much / many","much","Money är oräknebart!"],
+        ["How ___ friends are coming?","much / many","many","Friends är räknebart."],
+        ["The girl ___ won is my sister.","who / which","who","Människa → who."],
+        ["___ twenty students here.","There is / There are / It is","There are","Det finns i plural = There are."],
+        ["The dog wagged ___ tail.","its / it's","its (utan apostrof!)","Ägandeform har aldrig apostrof."]
+      ]),l),
+      (l)=>pickKlur([["Hur vet du om du ska skriva 'it's' eller 'its'?","Testa att byta ut mot 'it is'!","It's = It is."],["Varför är 'many homeworks' fel?","Homework är oräknebart (much / a lot of homework)","Inget plural-s."],["Varför heter det 'The police ARE here'?","Police och people är alltid plural på engelska","Tar are/were."]],l)
+    )
+  ];
+
+  // -------------------------------------------------------------------------
+  // 4. SPANSKA – Steg 1 (Åk 1–6), Fortsättning (Åk 7) & Fördjupning (Åk 8–9)
+  // -------------------------------------------------------------------------
+  if (s === 'spanska') return [
+    T("es_1",[1,2,3,4,5,6,7],`Åk ${g}: Substantiv – Genus (el/la, un/una) & Plural`,
+      "Ord på <code>-o</code> är oftast maskulina (<code>el/un</code>, pl. <code>los/unos</code>); ord på <code>-a</code> feminina (<code>la/una</code>, pl. <code>las/unas</code>).",
+      "⚡ <strong>Genvägen:</strong> Kom ihåg undantagen: <code>el problema</code> och <code>el día</code> (maskulina trots -a) samt <code>la mano</code> (feminin trots -o)!",
+      (l)=>{
+        const w=P([["libro","m","bok","libros"],["casa","f","hus","casas"],["perro","m","hund","perros"],["chica","f","flicka","chicas"],["coche","m","bil","coches"],["ciudad","f","stad","ciudades"],["problema","m","problem","problemas"],["mano","f","hand","manos"]]);
+        return adaptQ(`Artikel och plural för '${w[0]}' (${w[2]}): ___ ${w[0]} → _______`,"el/la → los/las",`${w[1]==='m'?'el':'la'} ${w[0]} → ${w[1]==='m'?'los':'las'} ${w[3]}`,`Vokal får -s, konsonant får -es.`,l);
+      },
+      (l)=>pickKlur([["Vad blir el, la, un, una i plural?","los, las, unos, unas","Pluralartiklar."],["Varför heter det 'el problema' och 'la mano'?","Viktiga undantagsord i spanskan","Memorera dem."],["Skriv 'städerna' på spanska (ciudad = f).","las ciudades","Konsonant får -es."]],l)
+    ),
+    T("es_2",[1,2,3,4,5,6,7,8,9],`Åk ${g}: Presens – Regelbundna verb (-AR${g>=7?', -ER och -IR':''})`,
+      "<strong>-AR:</strong> <code>-o, -as, -a, -amos, -áis, -an</code> • <strong>-ER:</strong> <code>-o, -es, -e, -emos, -éis, -en</code> • <strong>-IR:</strong> <code>-o, -es, -e, -imos, -ís, -en</code>.",
+      "⚡ <strong>Genvägen:</strong> <strong>Yo</strong> slutar på <code>-o</code>, <strong>Tú</strong> på <code>-s</code>, <strong>Nosotros</strong> på <code>-mos</code> och <strong>Ellos</strong> på <code>-n</code>!",
+      (l)=>{
+        const v=P(g<=6?[["hablar","prata","habl","ar"],["estudiar","studera","estudi","ar"],["trabajar","arbeta","trabaj","ar"],["escuchar","lyssna","escuch","ar"]]:[["hablar","prata","habl","ar"],["comer","äta","com","er"],["beber","dricka","beb","er"],["vivir","bo","viv","ir"],["escribir","skriva","escrib","ir"]]);
+        const p=P([["Yo (jag)",0],["Tú (du)",1],["Él/Ella (han/hon)",2],["Nosotros (vi)",3],["Vosotros (ni)",4],["Ellos (de)",5]]);
+        const ed={ar:["o","as","a","amos","áis","an"],er:["o","es","e","emos","éis","en"],ir:["o","es","e","imos","ís","en"]}[v[3]][p[1]];
+        return adaptQ(`Böj '${v[0]}' (${v[1]}) i presens för ${p[0]}:`,`-${ed}`,`${v[2]}${ed}`,`Stam '${v[2]}-' + '-${ed}'.`,l);
+      },
+      (l)=>pickKlur([["Varför utelämnar man ofta 'yo' eller 'tú' på spanska?","Verbändelsen visar redan vem som gör handlingen","Hablo = jag pratar."],["Var skiljer sig -ER och -IR-verb åt?","Endast i nosotros (-emos/-imos) och vosotros (-éis/-ís)","Övriga är lika."],["Översätt: 'Vi bor i Sverige och pratar spanska.'","Vivimos en Suecia y hablamos español.","Vivimos, hablamos."]],l)
+    ),
+    T("es_3",[6,7,8,9],`Åk ${g}: Ser, Estar eller Hay? (Att vara & Det finns)`,
+      "<strong>SER (soy, eres, es...):</strong> Egenskap, ursprung, tid. <strong>ESTAR (estoy, estás, está...):</strong> Plats & tillfälligt mående. <strong>HAY:</strong> Det finns.",
+      "⚡ <strong>Genvägen:</strong> <em>\"How you feel and where you are – always use the verb ESTAR!\"</em>",
+      (l)=>adaptQ(...P([
+        ["Yo ___ de Suecia.","soy / estoy","soy","Ursprung → ser."],
+        ["¿Dónde ___ Madrid?","es / está","está","Geografisk plats → estar!"],
+        ["Hoy ___ cansado (trött).","soy / estoy","estoy","Tillfälligt mående → estar."],
+        ["En la clase ___ veinte alumnos.","está / hay","hay","Det finns (obestämt) → hay."]
+      ]),l),
+      (l)=>pickKlur([["När används 'hay'?","För 'det finns' framför obestämd form","Aldrig el/la efter hay."],["Skillnad på 'Soy de Madrid' och 'Estoy en Madrid'?","Kommer ifrån vs befinner mig i just nu","Ursprung vs plats."],["Skillnad på 'es listo' och 'está listo'?","Smart/klok vs redo/klar","Byter betydelse."]],l)
+    ),
+    T("es_4",[1,2,3,4,5,6,7,8,9],`Åk ${g}: Tener (ha + ålder), Ir (gå/åka)${g>=7?' & Framtid (Ir + a)':''}`,
+      "<strong>TENER:</strong> <code>tengo, tienes, tiene, tenemos, tenéis, tienen</code>. <strong>IR:</strong> <code>voy, vas, va, vamos, vais, van</code>. <strong>Framtid:</strong> <code>ir + a + grundform</code>.",
+      "⚡ <strong>Genvägen:</strong> Ålder, hunger och törst uttrycks med <code>tener</code>: <code>Tengo doce años</code> (Jag är 12 år)!",
+      (l)=>adaptQ(...P([
+        ["Böj TENER: Yo ___ trece años. ¿Cuántos años ___ tú?","tengo / tienes","tengo, tienes","Ålder uttrycks med tener."],
+        ["Böj IR: Nosotros ___ a la playa.","vamos / van","vamos","Vi-formen av ir."],
+        ["Framtid (ir + a): Mañana yo (ska äta) ___ ___ comer.","voy a / va a","voy a","voy + a + grundform."]
+      ]),l),
+      (l)=>pickKlur([["Hur säger man 'Jag är 13 år' på spanska?","Tengo trece años","Med tener."],["Vilket litet ord står alltid efter 'ir' vid framtid?","Prepositionen 'a' (voy a...)","Glöms ofta."],["Översätt: 'Vi ska spela fotboll.'","Vamos a jugar al fútbol.","vamos a jugar."]],l)
+    ),
+    T("es_5",[6,7,8,9],`Åk ${g}: Adjektivböjning, Gustar & Siffror 1–100`,
+      "Adjektiv står <em>efter</em> substantivet och böjs i genus och plural (<code>rojo, roja, rojos, rojas</code>). <strong>Gustar:</strong> <code>me gusta</code> (ental/verb), <code>me gustan</code> (plural).",
+      "⚡ <strong>Genvägen:</strong> Adjektiv på <code>-e</code> (<em>grande, verde</em>) eller konsonant (<em>azul</em>) har samma form i maskulinum och femininum!",
+      (l)=>adaptQ(...P([
+        ["Böj adjektivet 'rojo': las casas ___ (de röda husen)","roja / rojas","rojas","Femininum plural → -as."],
+        ["Böj adjektivet 'grande': dos perros ___","grande / grandes","grandes","Slutar på -e → bara -s i plural."],
+        ["Gustar: Me ___ los gatos, pero me ___ bailar.","gustan / gusta","gustan, gusta","Plural ger gustan; verb ger alltid gusta."],
+        ["Spanska tal: Skriv 20, 30, 40 och 50 på spanska:","veinte...","veinte, treinta, cuarenta, cincuenta","Grundtiotalen."]
+      ]),l),
+      (l)=>pickKlur([["Ordföljd för 'en röd bil' på spanska?","un coche rojo (substantiv före adjektiv)","Omvänd ordföljd."],["Varför heter det 'Me gusta cantar y bailar' (utan -n)?","Verb i grundform tar alltid singular (gusta)","Viktig regel."],["Skillnad mellan 'cien' och 'ciento'?","Exakt 100 = cien; 101–199 = ciento...","Sifferregel."]],l)
+    )
+  ];
+
+  // -------------------------------------------------------------------------
+  // 5. FRANSKA – Steg 1 (Åk 1–6), Fortsättning (Åk 7) & Fördjupning (Åk 8–9)
+  // -------------------------------------------------------------------------
+  if (s === 'franska') return [
+    T("fr_1",[1,2,3,4,5,6,7],`Åk ${g}: Artiklar (le/la/l'/les) & Sammandragningar (au, aux, du)`,
+      "<code>à + le = au</code> • <code>à + les = aux</code> • <code>de + le = du</code>. Framför vokal eller stumt h blir le/la alltid <code>l'</code>.",
+      "⚡ <strong>Genvägen:</strong> Det är förbjudet att skriva <code>à le</code> eller <code>de le</code> – de smälter alltid ihop till <code>au</code> och <code>du</code>!",
+      (l)=>adaptQ(...P([
+        ["Sammandragning: Je vais (à + le) ___ cinéma.","au / à le","au","à + le = au."],
+        ["Sammandragning: Il parle (à + les) ___ élèves.","aux / à les","aux","à + les = aux."],
+        ["Sammandragning: Le livre (de + le) ___ prof.","du / de le","du","de + le = du."],
+        ["Sätt in le, la eller l': ___ école et ___ hôtel.","le / la / l'","l'école, l'hôtel","Framför vokal/stumt h → l'."]
+      ]),l),
+      (l)=>pickKlur([["När blir le/la till l'?","Framför vokal eller stumt h","Slipper vokalkrock."],["Varför 'à Paris' men 'au Japon'?","Länder har bestämd artikel (à + le = au)","Geografiregel."],["Varför 'mon amie' om en tjejkompis?","Framför vokal byts ma ut mot mon","Uttalsregel."]],l)
+    ),
+    T("fr_2",[1,2,3,4,5,6,7,8,9],`Åk ${g}: Presens – Regelbundna -ER-verb (parler, habiter, aimer)`,
+      "Ta bort <code>-er</code> och lägg på: <code>je -e, tu -es, il/elle/on -e, nous -ons, vous -ez, ils/elles -ent</code>.",
+      "⚡ <strong>Genvägen:</strong> Ändelserna <code>-e, -es, -ent</code> är <strong>helt stumma</strong> – så <em>je parle, tu parles, il parle, ils parlent</em> låter exakt likadant!",
+      (l)=>{
+        const v=P([["parler","prata","parl"],["habiter","bo","habit"],["aimer","gilla","aim"],["écouter","lyssna","écout"],["jouer","spela","jou"],["chanter","sjunga","chant"]]);
+        const p=P([["Je","e"],["Tu","es"],["Il/Elle","e"],["Nous","ons"],["Vous","ez"],["Ils/Elles","ent"]]);
+        return adaptQ(`Böj -ER-verbet '${v[0]}' (${v[1]}) för ${p[0]}:`,`-${p[1]}`,`${p[0]} ${v[2]}${p[1]}`,`Stam '${v[2]}-' + '-${p[1]}'.`,l);
+      },
+      (l)=>pickKlur([["Vilka fyra former av parler uttalas likadant?","je, tu, il/elle/on och ils/elles","Stumma ändelser."],["Varför stavas det 'nous mangeons' med e?","För att behålla mjukt g-ljud framför o","Uttalsstavning."],["Vilket ord ersätter ofta 'nous' i vardagligt tal?","On (on parle = vi pratar)","Böjs som il/elle."]],l)
+    ),
+    T("fr_3",[1,2,3,4,5,6,7,8,9],`Åk ${g}: Nyckelverben Être, Avoir${g>=7?' & Aller (+ Futur proche)':''}`,
+      "<strong>ÊTRE:</strong> <code>suis, es, est, sommes, êtes, sont</code>. <strong>AVOIR:</strong> <code>ai, as, a, avons, avez, ont</code>. <strong>ALLER:</strong> <code>vais, vas, va, allons, allez, vont</code>.",
+      "⚡ <strong>Genvägen:</strong> Ålder och hunger uttrycks med <code>avoir</code> (ha): <code>J'ai douze ans</code> (12 år), <code>J'ai faim</code> (hungrig)!",
+      (l)=>adaptQ(...P([
+        ["Böj ÊTRE: Je ___ suédois et nous ___ contents.","suis / sommes","suis, sommes","Vara."],
+        ["Böj AVOIR: J'___ douze ans. Quel âge ___-tu ?","ai / as","ai, as","Ålder med avoir."],
+        ["Böj ALLER: Nous ___ à Paris. Ils ___ bien.","allons / vont","allons, vont","Gå/åka."],
+        ["Framtid (Aller + grundform): Demain, je (ska resa) ___ voyager.","vais / va","vais (vais voyager)","Futur proche."]
+      ]),l),
+      (l)=>pickKlur([["Hur säger man 'Jag är 13 år' på franska?","J'ai treize ans","Med avoir."],["Skillnad på 'ils sont' och 'ils ont'?","De är (être) vs De har (avoir)","Viktig skillnad."],["Översätt: 'Vi ska äta.'","Nous allons manger (On va manger)","Futur proche."]],l)
+    ),
+    T("fr_4",[7,8,9],`Åk ${g}: Negation (ne...pas) & Partitiv artikel (du, de la, pas de)`,
+      "Sätt <code>ne</code> före verbet och <code>pas</code> efter verbet. Partitiv artikel (mat/dryck): <code>du</code> (mask.), <code>de la</code> (fem.), <code>de l'</code> (vokal).",
+      "⚡ <strong>Genvägen (PAS DE-regeln!):</strong> Efter en negation (<code>ne...pas</code>) blir <code>un, une, des, du, de la</code> ALLTID bara <strong><code>de</code></strong> (<code>Je n'ai pas DE chien</code>)!",
+      (l)=>adaptQ(...P([
+        ["Gör nekande: 'Je parle allemand.' →","ne ... pas","Je ne parle pas allemand.","ne + verb + pas."],
+        ["Partitiv artikel: Je bois ___ thé (m.) et ___ eau (vokal).","du / de l'","du thé, de l'eau","Obestämd mängd."],
+        ["PAS DE-regeln: 'J'ai un chien' → 'Je n'ai pas ___ chien.'","un / de","de (pas de chien)","Alltid de efter negation!"]
+      ]),l),
+      (l)=>pickKlur([["Var sitter ne...pas när det finns två verb?","Runt det första (böjda) verbet","Ex: Je ne vais pas partir."],["Vad blir 'du lait' efter ne...pas?","de lait (Je ne bois pas de lait)","Pas de-regeln."],["Vad betyder 'ne...jamais'?","Aldrig","Samma placering som ne...pas."]],l)
+    ),
+    T("fr_5",[6,7,8,9],`Åk ${g}: Franska siffror & Tal (1–100, inkl. 70, 80 och 90)`,
+      "Vid 70, 80 och 90 räknar franskan med addition och tjugotal!",
+      "⚡ <strong>Genvägen:</strong> <code>70 = 60+10</code> (<em>soixante-dix</em>), <code>80 = 4·20</code> (<em>quatre-vingts</em>), <code>90 = 4·20+10</code> (<em>quatre-vingt-dix</em>)!",
+      (l)=>adaptQ(...P([
+        ["Skriv med siffror: 'soixante-quinze' (60 + 15) =","75 / 65","75","60 + 15."],
+        ["Skriv med siffror: 'quatre-vingts' (4 · 20) =","80 / 40","80","4 · 20."],
+        ["Skriv med siffror: 'quatre-vingt-douze' (80 + 12) =","92 / 82","92","80 + 12."],
+        ["Skriv på franska: 20, 30, 40, 50 =","vingt...","vingt, trente, quarante, cinquante","Tiotalen."]
+      ]),l),
+      (l)=>pickKlur([["Hur säger man 72 på franska (60 + 12)?","soixante-douze","60 + 12."],["Hur säger man 95 (80 + 15)?","quatre-vingt-quinze","4·20 + 15."],["Vad är soixante + vingt?","80 (quatre-vingts)","60 + 20 = 80."]],l)
+    )
+  ];
+
+  // -------------------------------------------------------------------------
+  // 6. SO & GEOGRAFI – Anpassad för Låg (1–3), Mellan (4–6) & Hög (7–9)
+  // -------------------------------------------------------------------------
+  if (s === 'so') return [
+    T("so_l1",[1,2,3],`Åk ${g}: Väderstreck, Kartan, Årstider & Forntiden`,
+      "<strong>De fyra väderstrecken:</strong> Norr (uppåt på kartan), Öster (höger), Söder (nedåt), Väster (vänster). <strong>Forntidens 3 epoker:</strong> Stenåldern → Bronsåldern → Järnåldern.",
+      "⚡ <strong>Genvägen (Klock-ramsan medsols från kl. 12):</strong> <em><strong>N</strong>ågra <strong>Ö</strong>ver <strong>S</strong>ju <strong>V</strong>aknar</em> = <strong>Norr – Öster – Söder – Väster</strong>!",
+      (l)=>adaptQ(...P([
+        ["Vilka är de fyra väderstrecken i ordning medsols från norr?","N–Ö–S–V","Norr, Öster, Söder, Väster","Några Över Sju Vaknar."],
+        ["I vilket väderstreck går solen upp på morgonen och ner på kvällen?","Öster / Väster","Går upp i öster och ner i väster","Mitt på dagen står den i söder."],
+        ["Sätt forntidens tre tidsåldrar i rätt ordning (äldst först)!","Sten först","Stenåldern → Bronsåldern → Järnåldern","Uppkallade efter materialen i verktygen."],
+        ["Vad kallas den sista delen av järnåldern i Norden (ca 800–1050 e.Kr.)?","Vikingatiden","Vikingatiden","Slutade när kristendomen kom."],
+        ["Vilket nödnummer ringer man vid akut fara för liv, brand eller brott?","112","112","1177 för sjukvårdsrådgivning."]
+      ]),l),
+      (l)=>pickKlur([["Hur kommer du ihåg väderstrecken i rätt ordning runt kompassen?","Medsols: Norr – Öster – Söder – Väster","N–Ö–S–V."],["Varför slutade människorna under yngre stenåldern att bara jaga/samla och blev bofasta?","De lärde sig odla jorden och hålla tamboskap (bondestenåldern)!","Början till byar."],["Vad är en 'runsten' och från vilken tidsålder kommer de flesta?","Stenar med runskrift från järnåldern/vikingatiden","Historiska spår."]],l)
+    ),
+    T("so_1",[3,4,5,6],`Åk ${g}: Geografi – Sverige & Norden`,
+      "Norden = 5 länder (Sverige, Norge, Danmark, Finland, Island) + 3 självstyrande områden (Grönland, Färöarna, Åland).",
+      "⚡ <strong>Genvägen (Sveriges 4 största sjöar):</strong> <em>Vänern, Vättern, Mälaren, Hjälmaren</em>!",
+      (l)=>adaptQ(...P([
+        ["Huvudstäder i Norge, Danmark, Finland och Island?","Oslo...","Oslo, Köpenhamn, Helsingfors, Reykjavik","Nordens huvudstäder."],
+        ["Sveriges fyra största sjöar i storleksordning?","Vänern först","Vänern, Vättern, Mälaren, Hjälmaren","Vänern är störst i EU."],
+        ["Sveriges tre landsdelar och högsta berg?","Götaland...","Götaland, Svealand, Norrland • Kebnekaise","Grundgeografi."],
+        ["Vilka tre självstyrande områden ingår i Norden?","Grönland...","Grönland, Färöarna (Danmark) och Åland (Finland)","Självstyre."]
+      ]),l),
+      (l)=>pickKlur([["Varför har Island så många vulkaner?","Ligger på gränsen mellan två kontinentalplattor","Atlantiska ryggen."],["Skillnad på landskap (25) och län (21)?","Historisk/kulturell vs administrativ indelning","Sveriges geografi."],["Varför ger Golfströmmen oss milda vintrar?","För med sig varmt vatten från Mexikanska golfen","Havets värmelagring."]],l)
+    ),
+    T("so_2",[5,6,7,8],`Åk ${g}: Geografi – Europas länder & huvudstäder`,
+      "Gruppera Europas länder i Norden, Baltikum, Västeuropa, Centraleuropa, Sydeuropa och Östeuropa.",
+      "⚡ <strong>Genvägen:</strong> Baltikums tre länder står i <strong>bokstavsordning (E–L–L)</strong> från norr till söder: <em>Estland, Lettland, Litauen</em>!",
+      (l)=>{
+        const c=P([["Estland","Tallinn"],["Lettland","Riga"],["Litauen","Vilnius"],["Tyskland","Berlin"],["Polen","Warszawa"],["Frankrike","Paris"],["Spanien","Madrid"],["Portugal","Lissabon"],["Italien","Rom"],["Österrike","Wien"],["Schweiz","Bern"],["Tjeckien","Prag"],["Ungern","Budapest"],["Grekland","Aten"],["Nederländerna","Amsterdam"],["Belgien","Bryssel"]]);
+        return Math.random()>.5?adaptQ(`Huvudstad i ${c[0]}?`,`${c[1][0]}...`,c[1],`${c[1]} ligger i ${c[0]}.`,l):adaptQ(`I vilket land är ${c[1]} huvudstad?`,`${c[0][0]}...`,c[0],`${c[1]} är huvudstad i ${c[0]}.`,l);
+      },
+      (l)=>pickKlur([["Baltikums tre länder från norr till söder?","Estland, Lettland, Litauen","E–L–L."],["Vad heter huvudstaden i Schweiz?","Bern","Inte Zürich!"],["Vilka tre länder är Benelux?","Belgien, Nederländerna, Luxemburg","Västeuropa."]],l)
+    ),
+    T("so_3",[5,6,7,8,9],`Åk ${g}: Geografi – Europas floder, bergskedjor & klimat`,
+      "<strong>Berg:</strong> Alperna, Pyrenéerna, Uralbergen, Karpaterna. <strong>Floder:</strong> Volga (längst i Europa), Donau (längst i EU), Rhen.",
+      "⚡ <strong>Genvägen:</strong> <strong>Väder</strong> = här och nu; <strong>Klimat</strong> = genomsnittsväder under minst 30 år!",
+      (l)=>adaptQ(...P([
+        ["Europas längsta flod resp. EU:s längsta flod?","Volga / Donau","Volga (Ryssland) och Donau (mynnar i Svarta havet)","Stora vattenvägar."],
+        ["Bergskedja mellan Spanien/Frankrike resp. mot Asien?","Pyrenéerna / Ural","Pyrenéerna resp. Uralbergen","Gränsberg."],
+        ["Vad heter de tre sydeuropeiska halvöarna?","Iberiska...","Iberiska, Apenninska och Balkanhalvön","I Medelhavet."],
+        ["Skillnad mellan kustklimat och inlandsklimat?","Havet","Kust = jämnt/milt; Inland = kalla vintrar/heta somrar","Havet utjämnar."]
+      ]),l),
+      (l)=>pickKlur([["Skillnad på väder och klimat?","Väder = idag; Klimat = snitt över 30 år","Grundbegrepp."],["Hur bildas veckberg som Alperna?","När två kontinentalplattor krockar","Plattektonik."],["Vad utmärker medelhavsklimat?","Torra, varma somrar och milda, regniga vintrar","Subtropiskt."]],l)
+    ),
+    T("so_4",[4,5,6,7,8,9],`Åk ${g}: Samhälle – Demokrati, Riksdag, Regering & Grundlagar`,
+      "<strong>Riksdagen (349 ledamöter):</strong> Stiftar lagar och beslutar om statsbudget. <strong>Regeringen:</strong> Styr landet och verkställer besluten.",
+      "⚡ <strong>Genvägen:</strong> <strong>Riksdagen BESLUTAR</strong> – <strong>Regeringen VERKSTÄLLER</strong>! En grundlag kräver två riksdagsbeslut med val emellan.",
+      (l)=>adaptQ(...P([
+        ["Vilken instans stiftar lagar och beslutar om skatter?","Riksdag / Regering","Riksdagen (349 ledamöter)","Väljs vart 4:e år."],
+        ["Skillnad på proposition och motion?","Regering / Ledamot","Proposition = från regeringen; Motion = från riksdagsledamot","Lagförslag."],
+        ["Vilka är Sveriges fyra grundlagar?","RF, SO, TF, YGL","Regeringsformen, Successionsordningen, Tryckfrihetsförordningen, Yttrandefrihetsgrundlagen","Skyddar demokratin."],
+        ["Hur ändrar man en svensk grundlag?","Två beslut...","Två likadana riksdagsbeslut med ett riksdagsval emellan","Demokratiskt skydd."]
+      ]),l),
+      (l)=>pickKlur([["Direkt vs representativ demokrati?","Direkt = rösta i varje sakfråga; Representativ = välja politiker","Sverige har representativ."],["Varför krävs ett val mellan besluten för grundlagsändring?","Väljarna ska kunna stoppa farliga ändringar","Säkerhetsspärr."],["Vad innebär parlamentarism?","Regeringen måste tolereras av riksdagen","Kan annars röstas bort."]],l)
+    ),
+    T("so_5",[6,7,8,9],`Åk ${g}: Samhällsekonomi, Källkritik & Historiska epoker`,
+      "<strong>Utbud & Efterfrågan</strong> styr priset. <strong>Inflation</strong> = stigande priser. <strong>Källkritik:</strong> Äkthet, Tidssamband, Oberoende, Tendens.",
+      "⚡ <strong>Genvägen (Epoker):</strong> <em>Forntid → Antiken → Medeltid → Renässans/Stormaktstid → Upplysning → Industrialism → Vår tid</em>!",
+      (l)=>adaptQ(...P([
+        ["Vad händer med priset vid hög efterfrågan och lågt utbud?","Stiger / Sjunker","Priset stiger","Marknadsekonomi."],
+        ["Vad betyder 'inflation' och hur bromsar Riksbanken den?","Stigande priser","Priserna stiger • Bromsas med höjd styrränta","Penningpolitik."],
+        ["De fyra källkritiska kriterierna?","Äkthet...","Äkthet, Tidssamband, Oberoende, Tendens","Källkritik."],
+        ["Vad betyder 'urbanisering'?","Inflyttning","Inflyttning från landsbygd till städer","Industrialismen."]
+      ]),l),
+      (l)=>pickKlur([["Ordna: Medeltiden, Antiken, Industrialismen, Forntiden.","Forntiden → Antiken → Medeltiden → Industrialismen","Tidslinje."],["Vad betyder att en källa har 'tendens'?","Att den är partisk/vinklad","Källkritik."],["Hur samspelar hushåll och stat/kommun ekonomiskt?","Hushåll betalar skatt och får välfärd/bidrag tillbaka","Ekonomiska kretsloppet."]],l)
+    )
+  ];
+
+  // -------------------------------------------------------------------------
+  // 7. NO – Anpassad för Låg (1–3), Mellan (4–6) & Hög (7–9)
+  // -------------------------------------------------------------------------
+  if (s === 'no') return [
+    T("no_l1",[1,2,3,4],`Åk ${g}: Vattnets faser (Is, Vatten, Ånga) & Kretsloppet`,
+      "Vatten finns i tre faser: <strong>Fast form (is, under 0 °C)</strong>, <strong>Flytande form (vatten, 0–100 °C)</strong> och <strong>Gasform (vattenånga, vid 100 °C)</strong>.",
+      "⚡ <strong>Genvägen:</strong> <strong>Avdunstning</strong> = flytande → ånga (solen värmer). <strong>Kondensering</strong> = ånga → vattendroppar (moln bildas)!",
+      (l)=>adaptQ(...P([
+        ["Vid vilken temperatur smälter is och fryser vatten?","0 °C / 100 °C","0 °C","Fryspunkt / smältpunkt."],
+        ["Vid vilken temperatur kokar vatten och blir till vattenånga?","0 °C / 100 °C","100 °C","Kokpunkt."],
+        ["Vad kallas det när solen värmer sjön så vatten stiger upp som osynlig vattenånga?","Avdunstning / Kondensering","Avdunstning","Flytande → gas."],
+        ["Vad kallas det när varm vattenånga kyls ner högt uppe i luften och bildar molndroppar?","Avdunstning / Kondensering","Kondensering","Gas → flytande."]
+      ]),l),
+      (l)=>pickKlur([["Varför blir det imma (små vattendroppar) på badrumsspegeln när man duschar varmt?","Varm vattenånga träffar den kalla spegeln och kondenserar till vattendroppar!","Kondensering."],["Varför spricker en helt vattenfylld glasflaska om man lägger den i frysen?","Vatten utvidgar sig (tar större plats) när det fryser till is!","Därför flyter is."],["Förklara vattnets kretslopp i tre steg!","Avdunstning → Kondensering (moln) → Nederbörd (regn/snö)","Evigt kretslopp."]],l)
+    ),
+    T("no_5",[1,2,3,4,5,6,7,8,9],`Åk ${g}: Biologi – Fotosyntes, Cellandning, Ekologi & Kroppen`,
+      "<strong>Fotosyntes:</strong> <code>Koldioxid + Vatten + Solenergi → Druvsocker + Syre</code>.<br><strong>Cellandning:</strong> <code>Druvsocker + Syre → Koldioxid + Vatten + Energi</code>.",
+      "⚡ <strong>Genvägen:</strong> <strong>Cellandningen</strong> i mitokondrierna är exakt <strong>fotosyntesen baklänges</strong>!",
+      (l)=>adaptQ(...P([
+        ["Fotosyntes: Vilka ämnen tar växten upp och vad bildas?","Koldioxid + Vatten","Koldioxid + Vatten (+ solljus) → Druvsocker + Syre","Sker i kloroplasterna (klorofyll)."],
+        ["Cellandning: Vad förbränns i våra mitokondrier?","Druvsocker + Syre","Druvsocker + Syre → Koldioxid + Vatten + Energi","Ger kroppen energi."],
+        ["Blodets tre delar och deras uppgifter?","Röda, vita, plättar","Röda (syre), Vita (immunförsvar), Blodplättar (stoppar blödning)","Cirkulation."],
+        ["Ordning i näringskedjan: Konsument, Nedbrytare, Producent?","Växt först","Producent (växt) → Konsument (djur) → Nedbrytare (svamp/bakterie)","Ekologi."]
+      ]),l),
+      (l)=>pickKlur([["Hur hänger fotosyntes och cellandning ihop?","De bildar ett kretslopp av syre och koldioxid","Växter ↔ Djur."],["Vilka tre delar har en växtcell men inte en djurcell?","Cellvägg, kloroplaster (grönkorn) och stor vakuol","Cellbiologi."],["Varför ökar puls och andning vid löpning?","Musklernas cellandning kräver mer syre och druvsocker","Fysiologi."]],l)
+    ),
+    T("no_4",[4,5,6,7,8,9],`Åk ${g}: Kemi – Grundämnen, Kemiska formler (H₂O, CO₂) & pH-skalan`,
+      "<strong>Atomen:</strong> Protoner (+) och neutroner (0) i kärnan, elektroner (-) i skal. <strong>pH-skalan:</strong> <code>< 7</code> surt ($\text{H}^+$), <code>7</code> neutralt, <code>> 7</code> basiskt ($\text{OH}^-$).",
+      "⚡ <strong>Genvägen:</strong> I $3\text{ H}_2\text{O}$ gäller den lilla 2:an bara H, medan den stora 3:an multiplicerar hela molekylen (6 H och 3 O)!",
+      (l)=>{
+        const k=R(2,6);
+        return adaptQ(...P([
+          ["Kemiska tecken för Väte, Syre, Kol, Kväve, Järn och Guld?","H, O, C...","H, O, C, N, Fe, Au","Periodiska systemet."],
+          ["Vad heter H₂O, CO₂ och NaCl i vardagligt tal?","Vatten...","Vatten, Koldioxid och Koksalt","Kemiska föreningar."],
+          [`Hur många H och O finns det i ${k} H₂O?`,`${k*2} H, ${k} O`,`${k*2} väte (H) och ${k} syre (O)`,`${k}·2 = ${k*2} H, ${k}·1 = ${k} O.`],
+          ["pH-skalan: Citron har pH 2 och såpa pH 10. Surt eller basiskt?","<7 surt, >7 basiskt","Citron = surt (<7), Såpa = basiskt (>7)","Neutralisation ger pH 7."]
+        ]),l);
+      },
+      (l)=>pickKlur([["Skillnad på grundämne (O₂) och kemisk förening (H₂O)?","En sorts atomer vs minst två olika atomslag","Kemins grund."],["Vad visar atomnumret?","Antalet protoner i kärnan","Bestämmer ämnet."],["Vad bildas vid neutralisation (Syra + Bas)?","Vatten + ett salt","H⁺ + OH⁻ → H₂O."]],l)
+    ),
+    T("no_1",[6,7,8,9],`Åk ${g}: Fysik – Rörelse, Hastighet (s = v · t) & 3,6-regeln`,
+      "<code>Sträcka (s) = hastighet (v) · tid (t)</code> • <code>v = s / t</code> • <code>t = s / v</code>.",
+      "⚡ <strong>Genvägen (3,6-regeln):</strong> Från <code>m/s</code> till <code>km/h</code> multiplicerar du med <strong>3,6</strong> (<code>10 m/s = 36 km/h</code>). Från <code>km/h</code> till <code>m/s</code> dividerar du med <strong>3,6</strong>!",
+      (l)=>{
+        const v=P([5,10,15,20,25]), t=R(4,12)*l;
+        return Math.random()>.4?Q(`Hastighet (s = v·t): ${v} m/s under ${t} sekunder. Sträcka i meter?`,`${v*t} m`,`${v} · ${t} = ${v*t} m.`):Q(`Omvandla ${v} m/s till km/h (med 3,6-regeln):`,`${v*3.6} km/h`,`${v} · 3,6 = ${v*3.6} km/h.`);
+      },
+      (l)=>pickKlur([["Varför går det 3,6 km/h på 1 m/s?","3 600 sekunder på en timme = 3,6 km","Enhetsomvandling."],["180 km på 2 timmar. Medelhastighet?","90 km/h (25 m/s)","180 / 2 = 90."],["Blixten syns 5 s före åskknallen (ljudet = 340 m/s). Avstånd?","1 700 m","340 · 5 = 1 700 m."]],l)
+    ),
+    T("no_2",[6,7,8,9],`Åk ${g}: Fysik – Densitet (ρ = m / V) & Tyngdkraft (F = m · g)`,
+      "<strong>Densitet:</strong> <code>ρ = massa (m) / volym (V)</code> (vatten = <code>1,0 g/cm³</code>). <strong>Tyngdkraft:</strong> <code>F = m · g</code> (<code>g ≈ 10 N/kg</code> på jorden).",
+      "⚡ <strong>Genvägen:</strong> Allt med densitet <strong>under 1,0 g/cm³ flyter</strong> i vatten; över 1,0 sjunker!",
+      (l)=>{
+        const vol=R(2,9)*10, d=P([2,3,5,8]), kg=R(4,50)*l;
+        return Math.random()>.4?Q(`Densitet (ρ = m/V): Massa ${vol*d} g och volym ${vol} cm³. Densitet?`,`${d} g/cm³`,`${vol*d} / ${vol} = ${d} g/cm³.`):Q(`Tyngdkraft (F = m·g): Massa ${kg} kg på jorden (g ≈ 10 N/kg). Kraft i N?`,`${kg*10} N`,`${kg} · 10 = ${kg*10} N.`);
+      },
+      (l)=>pickKlur([["Skillnad på massa (kg) och tyngd (N) på månen?","Massan är densamma, tyngden är 1/6","Mängd materia vs dragningskraft."],["Varför flyter trä (0,6 g/cm³) i vatten?","Lägre densitet än vatten (1,0 g/cm³)","Flytkraft."],["Varför flyter en stålfärja?","Luftfylld → medeldensiteten blir under 1,0 g/cm³","Arkimedes princip."]],l)
+    ),
+    T("no_3",[5,6,7,8,9],`Åk ${g}: Fysik – Ellära, Kopplingar, Ohms lag (U=R·I) & Effekt`,
+      "<strong>Ohms lag:</strong> <code>U (Volt) = R (Ohm, Ω) · I (Ampere)</code>. <strong>Effekt:</strong> <code>P (Watt) = U · I</code>. <strong>Energi:</strong> <code>E (kWh) = P · t</code>.",
+      "⚡ <strong>Genvägen (URI-triangeln):</strong> Håll för den bokstav du söker: <code>U = R·I</code>, <code>I = U/R</code>, <code>R = U/I</code>!",
+      (l)=>{
+        const i=R(2,8), r=R(4,15), i2=P([2,4,5,10]);
+        return Math.random()>.4?Q(`Ohms lag (U = R·I): R = ${r} Ω och I = ${i} A. Spänning U?`,`${r*i} V`,`${r} · ${i} = ${r*i} V.`):Q(`Effekt (P = U·I): Spänning 230 V och ström ${i2} A. Effekt i W?`,`${230*i2} W`,`230 · ${i2} = ${230*i2} W.`);
+      },
+      (l)=>pickKlur([["Vad händer i serie- resp. parallellkoppling om en lampa går sönder?","Serie: alla slocknar; Parallell: övriga lyser","Kopplingstyper."],["Kamin på 2 000 W (2 kW) i 4 timmar. Förbrukning i kWh?","8 kWh","2 kW · 4 h = 8 kWh."],["Max effekt på 230 V med 10 A säkring?","2 300 W (2,3 kW)","230 · 10 = 2 300 W."]],l)
+    )
+  ];
+
+  // -------------------------------------------------------------------------
+  // 8. MUSIK & KEYBOARD – Anpassad för Låg (1–3), Mellan (4–6) & Hög (7–9)
+  // -------------------------------------------------------------------------
+  return [
+    T("mu_1",[1,2,3,4,5,6,7,8,9],`Åk ${g}: Notläsning i G-klav (FACE) & Klaviaturens stamtoner`,
+      "<strong>De 7 stamtonerna:</strong> <code>C – D – E – F – G – A – B</code>. På keyboarden sitter <strong>C</strong> alltid precis till vänster om de <strong>2 svarta tangenterna</strong>!",
+      "⚡ <strong>Genvägen (G-klaven):</strong> Mellanrummen nedifrån och upp stavar <strong>F – A – C – E</strong>! Linjerna: <em>\"<strong>E</strong>n <strong>G</strong>od <strong>B</strong>ulle <strong>D</strong>uger <strong>F</strong>int\"</em> (E–G–B–D–F)!",
+      (l)=>adaptQ(...P([
+        ["G-klav: Vilka 4 toner ligger i MELLANRUMMEN nedifrån och upp?","FACE","F – A – C – E","Minnesordet FACE!"],
+        ["G-klav: Vilka 5 toner ligger på LINJERNA nedifrån och upp?","E-G-B-D-F","E – G – B – D – F","En God Bulle Duger Fint."],
+        ["Klaviaturen: Vilken vit tangent ligger precis till vänster om de 2 svarta (och om de 3 svarta)?","C och F","C (vid de 2 svarta) och F (vid de 3 svarta)","Orienteringspunkter."],
+        ["Klaviaturen: Mellan vilka vita tangenter finns INGEN svart tangent?","E-F & B-C","Mellan E–F samt mellan B–C","Naturligt halvt tonsteg."]
+      ]),l),
+      (l)=>pickKlur([["Hur hittar du snabbt C och F på en keyboard?","Till vänster om de 2 svarta (C) resp. de 3 svarta (F)","Tvillingar & trillingar."],["Vilken ton ligger på första hjälplinjen under G-klaven?","Ettstreckade C (C1)","Grundton."],["Hur många halva tonsteg går det på en hel oktav?","12 halva tonsteg","7 vita + 5 svarta."]],l)
+    ),
+    T("mu_2",[1,2,3,4,5,6,7,8,9],`Åk ${g}: Rytmmatte – Notvärden${g>=4?', Punkterade noter':''} & Taktarter`,
+      "I 4/4-takt: <strong>Helnot</strong> = 4 slag • <strong>Halvnot</strong> = 2 slag • <strong>Fjärdedel</strong> = 1 slag • <strong>Åttondel</strong> = 0,5 slag • <strong>Sextondel</strong> = 0,25 slag.",
+      "⚡ <strong>Genvägen:</strong> En <strong>punkt</strong> efter en not förlänger noten med <strong>hälften av dess eget värde</strong> (punkterad halvnot = <code>2 + 1 = 3 slag</code>)!",
+      (l)=>adaptQ(...P([
+        ["Notmatte (4/4): Hur många slag är en punkterad halvnot + en fjärdedelsnot?","3 + 1","4 slag (3 + 1)","Hel 4/4-takt."],
+        ["Notmatte: Hur många åttondelsnoter går det på en hel 4/4-takt?","8 st","8 åttondelsnoter","2 per slag."],
+        ["Notmatte: Hur många slag är en punkterad fjärdedelsnot?","1,5 slag","1,5 slag (1 + 0,5)","Fjärdedel + åttondel."],
+        ["Taktart: Vad anger siffrorna i 3/4-takt?","3 slag/takt","3 slag per takt, där varje fjärdedel är 1 slag","Valstakt."]
+      ]),l),
+      (l)=>pickKlur([["Hur hänger notvärden ihop med bråkräkning?","Halvnot = 1/2 takt, fjärdedel = 1/4, åttondel = 1/8","Matematik i musiken."],["I en 4/4-takt finns 1 halvnot och 3 åttondelar. Vad saknas?","1 åttondelsnot (0,5 slag)","2 + 1,5 + 0,5 = 4."],["Hur många sextondelar går det på en halvnot?","8 sextondelar","4 per fjärdedel."]],l)
+    ),
+    T("mu_3",[4,5,6,7,8,9],`Åk ${g}: Piano/Keyboard-ackord – Dur & Moll (4–3- och 3–4-regeln)`,
+      "<strong>DUR-ackord (4–3-regeln):</strong> Grundton + 4 halva steg + 3 halva steg.<br><strong>MOLL-ackord (3–4-regeln):</strong> Grundton + 3 halva steg + 4 halva steg.",
+      "⚡ <strong>Genvägen (Dur → Moll på 1 sekund!):</strong> Flytta bara <strong>mittentonen (tersen) 1 tangent åt vänster</strong> så blir ett Dur-ackord till Moll!",
+      (l)=>{
+        const c=P(g<=6?[["C-dur (C)","C – E – G","4+3 steg (vita)."],["F-dur (F)","F – A – C","4+3 steg (vita)."],["G-dur (G)","G – B – D","4+3 steg (vita)."],["A-moll (Am)","A – C – E","3+4 steg (vita)."],["D-moll (Dm)","D – F – A","3+4 steg (vita)."],["E-moll (Em)","E – G – B","3+4 steg (vita)."]]:[["C-dur (C)","C – E – G","4+3 steg (vita)."],["C-moll (Cm)","C – Eb – G","Sänk E till Eb."],["D-moll (Dm)","D – F – A","3+4 steg (vita)."],["D-dur (D)","D – F# – A","Höj F till F#."],["E-moll (Em)","E – G – B","3+4 steg (vita)."],["E-dur (E)","E – G# – B","Höj G till G#."],["F-dur (F)","F – A – C","4+3 steg (vita)."],["G-dur (G)","G – B – D","4+3 steg (vita)."],["A-moll (Am)","A – C – E","3+4 steg (vita)."],["A-dur (A)","A – C# – E","Höj C till C#."]]);
+        return adaptQ(`Keyboard-ackord: Vilka 3 tangenter ingår i ${c[0]}?`,`Grundton ${c[1][0]}`,c[1],c[2],l);
+      },
+      (l)=>pickKlur([["Vilka 4 ackord ingår i C-durs poprunda (endast vita tangenter)?","C, G, Am, F","C-E-G, G-B-D, A-C-E, F-A-C."],["Hur ändrar du F-dur (F–A–C) till F-moll på keyboarden?","Sänk mittentonen A till Ab (F–Ab–C)","4–3 blir 3–4."],["Varför spelar man ofta ackord i 'omvändning' på keyboard?","Slipper flytta handen långt mellan ackorden","Smidiga byten."]],l)
+    ),
+    T("mu_4",[1,2,3,4,5,6,7,8,9],`Åk ${g}: Dynamik (p, mf, f), Tempo${g>=6?' & Förtecken (# och b)':''}`,
+      "<strong>Dynamik:</strong> <code>p</code> (svagt), <code>mp</code> (medelsvagt), <code>mf</code> (medelstarkt), <code>f</code> (starkt). <strong>Förtecken:</strong> <code>#</code> höjer ½ steg (<em>-iss</em>), <code>b</code> sänker ½ steg (<em>-ess</em>).",
+      "⚡ <strong>Genvägen:</strong> Ordet <em>pianoforte</em> betyder bokstavligen <strong>svagt–starkt</strong> på italienska!",
+      (l)=>adaptQ(...P([
+        ["Dynamik: Vad betyder p, mp, mf och f?","svagt / starkt","p=svagt, mp=medelsvagt, mf=medelstarkt, f=starkt","Styrkegrader."],
+        ["Dynamik: Vad betyder crescendo (<) och diminuendo (>)?","starkare / svagare","Gradvis starkare resp. gradvis svagare","Dynamikförändring."],
+        ["Förtecken: Vad gör # resp. b med en ton (t.ex. F# och Bb)?","höjer / sänker","# höjer ½ steg (Fiss), b sänker ½ steg (Bess)","Svarta tangenter."],
+        ["Tempo: Ordna från långsammast till snabbast: Allegro, Largo, Moderato","Largo först","Largo → Moderato → Allegro","Tempobeteckningar."]
+      ]),l),
+      (l)=>pickKlur([["Varför är musiktermer som piano och forte på italienska?","Nottrycket och musikteorin utvecklades i Italien","Internationell standard."],["Varför är F# och Gb samma svarta tangent?","Ligger mitt emellan F och G","Enharmoniska toner."],["Vilken dur- och molltonart har inga förtecken alls?","C-dur och A-moll","Parallelltonarter."]],l)
+    )
+  ];
+}
+
+// Filtrerar fram exakt de mikromoment som hör till vald årskurs!
+function getTopics(s, g) {
+  const all = getAllTopics(s, g);
+  const filtered = all.filter(t => !t.grades || t.grades.includes(g));
+  return filtered.length ? filtered : all;
+}
+
+function setS(s){ curS=s; document.querySelectorAll(".sbtn").forEach(b=>b.classList.toggle("act",b.dataset.s===s)); updT(); render(); }
+function setG(g){ curG=g; document.querySelectorAll(".gbtn").forEach((b,i)=>b.classList.toggle("act",i+1===g)); updT(); render(); }
+function setL(l){ curL=l; document.querySelectorAll(".lbtn").forEach(b=>b.classList.toggle("act",parseInt(b.dataset.l)===l)); updT(); render(); }
+
+function updT(){
+  const list=getTopics(curS,curG), sel=document.getElementById("tSel"), prev=sel.value;
+  document.getElementById("tLbl").textContent=`2. Specifikt Träningsområde i Åk ${curG} (${list.length} st)`;
+  sel.innerHTML="";
+  list.forEach((t,i)=>{ const o=document.createElement("option"); o.value=t.id; o.textContent=t.title; if(t.id===prev||i===0) o.selected=true; sel.appendChild(o); });
+  const lDesc={1:"Nivå 1 (Bas – med stöd)",2:"Nivå 2 (Kärnnivå)",3:"Nivå 3 (Utmaning)"}[curL];
+  const bkTxt=curS==='matte'?` (${MBOOKS[curG]})`:'';
+  document.getElementById("gBadge").innerHTML=`🎯 <strong>${SNAMES[curS]} • Åk ${curG}${bkTxt} • ${lDesc}</strong>`;
+}
+
+function render(){
+  const list=getTopics(curS,curG), topic=list.find(t=>t.id===document.getElementById("tSel").value)||list[0];
+  const cnt=parseInt(document.getElementById("cSel").value);
+  const sM=document.getElementById("cM").checked, sS=document.getElementById("cS").checked;
+  const sE=document.getElementById("cE").checked, sK=document.getElementById("cK").checked;
+  const sG=document.getElementById("cG").checked, sF=document.getElementById("cF").checked;
+
+  const workedEx = topic.gen(curL);
+  const ex=[], used=new Set([workedEx.q]);
+  for(let i=0;i<400&&ex.length<cnt;i++){
+    const it=topic.gen(curL);
+    if(!used.has(it.q)||i>250){ used.add(it.q); ex.push(it); }
+  }
+  const klurList = typeof topic.klur === 'function' ? topic.klur(curL) : topic.klur;
+  const lTxt={1:"Nivå 1 (Bas)",2:"Nivå 2 (Kärna)",3:"Nivå 3 (Utmaning)"}[curL];
+  const bkTxt=curS==='matte'?MBOOKS[curG]:SNAMES[curS];
+  const sCol=curS!=='matte'?'sgl':'';
+
+  const ped=(sM||sS)?`<div class="pgrid ${!(sM&&sS)?'sgl':''}">
+    ${sM?`<div class="ibox"><div class="ititle">📖 Så här fungerar det (Metod & Regel)</div><div>${topic.method}</div></div>`:''}
+    ${sS?`<div class="ibox sh"><div class="ititle">💡 Genvägen / Knepet</div><div>${topic.shortcut}</div></div>`:''}
+  </div>`:'';
+
+  const exBox=sE?`<div class="exbox">
+    <strong>📌 Löst typexempel (${lTxt}):</strong> &nbsp; ${workedEx.q} &nbsp;→&nbsp; <strong>Svar: ${workedEx.a}</strong> &nbsp; <em>(${workedEx.step})</em>
+  </div>`:'';
+
+  const exH=`<div class="egrid ${sCol}">`+ex.map((e,i)=>sG
+    ?`<div class="eitem ws"><div style="display:flex;width:100%;align-items:baseline"><span class="enum">${i+1}.</span><span class="eq">${e.q}</span><span class="eline"></span></div><div class="wgrid"></div></div>`
+    :`<div class="eitem"><span class="enum">${i+1}.</span><span class="eq">${e.q}</span><span class="eline"></span></div>`
+  ).join("")+`</div>`;
+
+  const kluH=(sK&&klurList)?`<div class="stitle"><span>🧩 Veckans Kluringar & Problemlösning (Åk ${curG} • ${lTxt})</span><small>Visa hur du tänker!</small></div>
+    <div class="klist">${klurList.map((k,i)=>`<div class="kcard"><div class="khead"><span>Kluring K${i+1}</span><span>${k[0]}</span></div><div>${k[1]}</div><div class="kans">Svar: ______________________________</div></div>`).join("")}</div>`:'';
+
+  const p1=`<article class="page">
+    <div class="phdr"><div><div class="btag">Årskurs ${curG} • ${bkTxt} • ${lTxt}</div><h1>${topic.title}</h1></div><div class="meta"><div>Namn: <span></span></div><div>Datum: <span></span></div></div></div>
+    ${ped}${exBox}
+    <div class="stitle"><span>✏️ Mängdträning på hjärnans villkor</span><small>Åk ${curG} • ${lTxt} • ${ex.length} uppgifter</small></div>
+    ${exH}${kluH}
+    <div class="ftr"><div>Skolfabriken Åk 1–9 • ${SNAMES[curS]} (Lgr22)</div><div>Självskattning: ☐ Lätt  ☐ Lagom  ☐ Utmanande</div></div>
+  </article>`;
+
+  const p2=sF?`<article class="page">
+    <div class="phdr"><div><div class="btag">FACIT & LÖSNINGSSTÖD • Årskurs ${curG} • ${bkTxt}</div><h1>Facit: ${topic.title} (${lTxt})</h1></div><div class="meta"><div>Rättningsblad med tankekedjor</div></div></div>
+    <div class="exbox" style="margin-bottom:8px"><strong>🎯 Pedagogiskt tips vid rättning:</strong> Om ett svar blivit fel – sudda inte ut direkt! Följ <em>tankekedjan</em> under svaret tillsammans med barnet för att se var i steget tanken vände.</div>
+    <div class="stitle"><span>✅ Svar & förklaringar (1–${ex.length})</span></div>
+    <div class="fgrid">${ex.map((e,i)=>`<div class="fitem"><strong>${i+1}.</strong> ${e.q}<br><strong>Svar:${e.a}</strong><span class="fstep">💡 ${e.step}</span></div>`).join("")}</div>
+    ${(sK&&klurList)?`<div class="stitle" style="margin-top:10px"><span>✅ Svar & lösningar – Veckans Kluringar</span></div><div class="klist">${klurList.map((k,i)=>`<div class="kcard"><div class="khead"><span>Kluring K${i+1} (${k[0]})</span><span>Svar: ${k[2]}</span></div><div><strong>Lösningsförslag:</strong> ${k[3]}</div></div>`).join("")}</div>`:''}
+    <div class="ftr"><div>Facit • Skolfabriken Åk 1–9</div><div>Sida 2 (Facit)</div></div>
+  </article>`:'';
+
+  document.getElementById("out").innerHTML=p1+p2;
+}
+
+window.addEventListener("DOMContentLoaded",()=>{updT();render();});
+</script>
+</body>
+</html>
